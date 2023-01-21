@@ -80,6 +80,40 @@ export default function Home() {
           </h2>
         </div>
       </div>
+      <div className="mt-20 flex items-center mb-20">
+        <div>
+          <h2 className="font-bold text-5xl">Car'Clean</h2>
+          <p className="mt-5 text-justify pr-10">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa
+            doloribus veritatis architecto, consectetur suscipit laboriosam sed,
+            perspiciatis minus ipsa ducimus nesciunt. Eius placeat nesciunt, ab
+            commodi architecto maiores corporis? Enim beatae nulla illum placeat
+            non recusandae. Suscipit iusto voluptatum quas provident ea animi
+            cupiditate expedita architecto rerum minus aliquam atque.
+          </p>
+          <p className="mt-5 text-justify pr-10">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa
+            doloribus veritatis architecto, consectetur suscipit laboriosam sed,
+            perspiciatis minus ipsa ducimus nesciunt. Eius placeat nesciunt, ab
+            commodi architecto maiores corporis? Enim beatae nulla illum placeat
+            non recusandae. Suscipit iusto voluptatum quas provident ea animi
+            cupiditate expedita architecto rerum minus aliquam atque.
+          </p>
+          <p className="mt-5 text-justify pr-10">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa
+            doloribus veritatis architecto, consectetur suscipit laboriosam sed,
+            perspiciatis minus ipsa ducimus nesciunt. Eius placeat nesciunt, ab
+            commodi architecto maiores corporis? Enim beatae nulla illum placeat
+            non recusandae. Suscipit iusto voluptatum quas provident ea animi
+            cupiditate expedita architecto rerum minus aliquam atque
+          </p>
+        </div>
+        <img
+          src="/images/the-garage/front.jpg"
+          alt="devanture du garage Car'Clean"
+          className="rounded-full object-cover h-96 w-96"
+        />
+      </div>
     </Layout>
   );
 }
