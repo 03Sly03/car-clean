@@ -5,7 +5,7 @@ import Layout from '../components/Layout';
 export default function Home() {
   return (
     <Layout title="Accueil">
-      <div className="promo relative">
+      <div className="hover:scale-105 promo relative">
         <img
           src="/images/promos/pneus.jpg"
           alt="pneus de voiture"
@@ -16,9 +16,9 @@ export default function Home() {
           <p>-20 %</p>
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 mt-20">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 mt-20 text-xl">
         <Link href="/usedVehicles">
-          <div className="h-52 w-auto bg-[#ef7a3785] flex items-center justify-center shadow-md rounded-tl-[100px] rounded-br-[100px] m-5 relative">
+          <div className="hover:scale-105 h-52 w-auto bg-[#ef7a3757] flex items-center justify-center shadow-lg shadow-gray-500 rounded-tl-[100px] rounded-br-[100px] m-5 relative">
             <img
               src="/images/card-home/parcauto.jpg"
               alt="parc automobile"
@@ -29,59 +29,69 @@ export default function Home() {
             </h2>
           </div>
         </Link>
-        <div className="h-52 w-auto bg-[#2f2f4785] flex items-center justify-center shadow-md rounded-tl-[100px] rounded-br-[100px] m-5 relative">
-          <img
-            src="/images/card-home/parcauto.jpg"
-            alt="parc automobile"
-            className="object-cover h-full w-full rounded-tl-[100px] rounded-br-[100px] opacity-10"
-          />
-          <h2 className="font-bold text-center tracking-widest absolute">
-            Maintenance
-          </h2>
-        </div>
-        <div className="h-52 w-auto bg-[#ef7a3785] flex items-center justify-center shadow-md rounded-tl-[100px] rounded-br-[100px] m-5 relative">
-          <img
-            src="/images/card-home/parcauto.jpg"
-            alt="parc automobile"
-            className="object-cover h-full w-full rounded-tl-[100px] rounded-br-[100px] opacity-10"
-          />
-          <h2 className="font-bold text-center tracking-widest absolute">
-            Recharge de climatisation
-          </h2>
-        </div>
-        <div className="h-52 w-auto bg-[#2f2f4785] flex items-center justify-center shadow-md rounded-tl-[100px] rounded-br-[100px] m-5 relative">
-          <img
-            src="/images/card-home/parcauto.jpg"
-            alt="parc automobile"
-            className="object-cover h-full w-full rounded-tl-[100px] rounded-br-[100px] opacity-10"
-          />
-          <h2 className="font-bold text-center tracking-widest absolute">
-            Changement de pneumatique
-          </h2>
-        </div>
-        <div className="h-52 w-auto bg-[#ef7a3785] flex items-center justify-center shadow-md rounded-tl-[100px] rounded-br-[100px] m-5 relative">
-          <img
-            src="/images/card-home/parcauto.jpg"
-            alt="parc automobile"
-            className="object-cover h-full w-full rounded-tl-[100px] rounded-br-[100px] opacity-10"
-          />
-          <h2 className="font-bold text-center tracking-widest absolute">
-            Pièces détachées
-          </h2>
-        </div>
-        <div className="h-52 w-auto bg-[#2f2f4785] flex items-center justify-center shadow-md rounded-tl-[100px] rounded-br-[100px] m-5 relative">
-          <img
-            src="/images/card-home/parcauto.jpg"
-            alt="parc automobile"
-            className="object-cover h-full w-full rounded-tl-[100px] rounded-br-[100px] opacity-10"
-          />
-          <h2 className="font-bold text-center tracking-widest absolute">
-            Parallélisme
-          </h2>
-        </div>
+        <Link href="/maintenance">
+          <div className="hover:scale-105 h-52 w-auto bg-[#2f2f4757] flex items-center justify-center shadow-lg shadow-gray-500 rounded-tl-[100px] rounded-br-[100px] m-5 relative">
+            <img
+              src="/images/card-home/maintenance.jpg"
+              alt="parc automobile"
+              className="object-cover h-full w-full rounded-tl-[100px] rounded-br-[100px] opacity-10"
+            />
+            <h2 className="font-bold text-center tracking-widest absolute">
+              Faire réparer sa voiture
+            </h2>
+          </div>
+        </Link>
+        <Link href="/maintenance">
+          <div className="hover:scale-105 h-52 w-auto bg-[#ef7a3757] flex items-center justify-center shadow-lg shadow-gray-500 rounded-tl-[100px] rounded-br-[100px] m-5 relative">
+            <img
+              src="/images/card-home/clim.jpg"
+              alt="parc automobile"
+              className="object-cover h-full w-full rounded-tl-[100px] rounded-br-[100px] opacity-10"
+            />
+            <h2 className="font-bold text-center tracking-widest absolute">
+              Recharge de climatisation
+            </h2>
+          </div>
+        </Link>
+        <Link href="/maintenance">
+          <div className="hover:scale-105 h-52 w-auto bg-[#2f2f4757] flex items-center justify-center shadow-lg shadow-gray-500 rounded-tl-[100px] rounded-br-[100px] m-5 relative">
+            <img
+              src="/images/card-home/tire.jpg"
+              alt="parc automobile"
+              className="object-cover h-full w-full rounded-tl-[100px] rounded-br-[100px] opacity-10"
+            />
+            <h2 className="font-bold text-center tracking-widest absolute">
+              Changement de pneumatique
+            </h2>
+          </div>
+        </Link>
+        <Link href="/maintenance">
+          <div className="hover:scale-105 h-52 w-auto bg-[#ef7a3757] flex items-center justify-center shadow-lg shadow-gray-500 rounded-tl-[100px] rounded-br-[100px] m-5 relative">
+            <img
+              src="/images/card-home/carpart.jpg"
+              alt="parc automobile"
+              className="object-cover h-full w-full rounded-tl-[100px] rounded-br-[100px] opacity-10"
+            />
+            <h2 className="font-bold text-center tracking-widest absolute">
+              Pièces détachées
+            </h2>
+          </div>
+        </Link>
+        <Link href="/maintenance">
+          <div className="hover:scale-105 h-52 w-auto bg-[#2f2f4757] flex items-center justify-center shadow-lg shadow-gray-500 rounded-tl-[100px] rounded-br-[100px] m-5 relative">
+            <img
+              src="/images/card-home/para.jpg"
+              alt="parc automobile"
+              className="object-cover h-full w-full rounded-tl-[100px] rounded-br-[100px] opacity-10"
+            />
+            <h2 className="font-bold text-center tracking-widest absolute">
+              Parallélisme
+            </h2>
+          </div>
+        </Link>
       </div>
-      <div className="mt-20 flex items-center mb-20">
-        <div>
+      <div className="mt-20 items-center mb-20 grid grid-cols-1 gap-3 lg:grid-cols-2">
+        <div className="mb-10">
           <h2 className="font-bold text-5xl">Car'Clean</h2>
           <p className="mt-5 text-justify pr-10">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa
@@ -108,11 +118,13 @@ export default function Home() {
             cupiditate expedita architecto rerum minus aliquam atque
           </p>
         </div>
-        <img
-          src="/images/the-garage/front.jpg"
-          alt="devanture du garage Car'Clean"
-          className="rounded-full object-cover h-96 w-96"
-        />
+        <div className="flex justify-center">
+          <img
+            src="/images/the-garage/front.jpg"
+            alt="devanture du garage Car'Clean"
+            className="rounded-full object-cover h-96 w-96"
+          />
+        </div>
       </div>
     </Layout>
   );

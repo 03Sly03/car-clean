@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { ToastContainer } from 'react-toastify';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import 'react-toastify/dist/ReactToastify.css';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import Image from 'next/image';
@@ -10,9 +10,9 @@ import { Bars3Icon, XMarkIcon, UserIcon } from '@heroicons/react/24/outline';
 
 const navigation = [
   { name: 'Accueil', href: '/', current: false },
-  { name: 'Contact', href: '#', current: false },
+  { name: 'Contact', href: '/contact', current: false },
   { name: "Véhicules d'occasion", href: '/usedVehicles', current: false },
-  { name: 'A propos', href: '#', current: false },
+  { name: 'Réparation', href: 'maintenance', current: false },
 ];
 
 function classNames<T>(...classes: T[]) {
@@ -30,6 +30,10 @@ function Layout({ title, children }: Props) {
   navigation.filter((page) =>
     title === page.name ? (page.current = true) : (page.current = false)
   );
+
+  const logoutClickHandler = () => {
+    signOut({ callbackUrl: '/' });
+  };
 
   return (
     <>
@@ -173,8 +177,8 @@ function Layout({ title, children }: Props) {
                       {status === 'loading' ? (
                         'Loading'
                       ) : session?.user ? (
-                        <div>
-                          <p className="text-[#2f2f47] font-semibold">
+                        <>
+                          <p className="text-[#2f2f47] font-semibold ml-10">
                             {session.user.name}
                           </p>
                           <Menu as="div" className="relative ml-3">
@@ -234,6 +238,7 @@ function Layout({ title, children }: Props) {
                                         active ? 'bg-gray-100' : '',
                                         'block px-4 py-2 text-sm text-gray-700'
                                       )}
+                                      onClick={logoutClickHandler}
                                     >
                                       Sign out
                                     </Link>
@@ -242,7 +247,7 @@ function Layout({ title, children }: Props) {
                               </Menu.Items>
                             </Transition>
                           </Menu>
-                        </div>
+                        </>
                       ) : (
                         <div>
                           <Link className="p-2" href="/login">

@@ -19,6 +19,17 @@ a {
   box-sizing: border-box;
 }
 
+.card-construction {
+  border: 2px solid #ef7937;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #ef7a3756;
+  width: 75%;
+  height: 492px;
+}
+
 .promo {
   @apply m-2 block rounded-tl-[200px] rounded-br-[200px] shadow-md h-52 w-auto;
 }

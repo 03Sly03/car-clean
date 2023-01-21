@@ -92,13 +92,13 @@ function LoginScreen() {
         <div className="mb-4">
           <button className="primary-button">Se connecter</button>
         </div>
+        <div className="mb-4">
+          Vous n'avez pas de compte chez nous ?&nbsp;
+          <Link className="text-blue-600 hover:text-blue-800" href="register">
+            S'enregistrer
+          </Link>
+        </div>
       </form>
-      <div className="mb-4">
-        Vous n'avez pas de compte chez nous ?&nbsp;
-        <Link className="text-blue-600 hover:text-blue-800" href="register">
-          S'enregistrer
-        </Link>
-      </div>
     </Layout>
   );
 }
