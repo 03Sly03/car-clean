@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['flowbite.com', 'tailwindui.com', 'images.unsplash.com'],
+    domains: [],
   },
   reactStrictMode: true,
 };

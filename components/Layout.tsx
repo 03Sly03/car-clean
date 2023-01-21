@@ -52,7 +52,7 @@ function Layout({ title, children }: Props) {
                   <div className="flex w-full justify-center absolute bottom-2 left-0">
                     <Link href="/">
                       <Image
-                        className="block lg:hidden sm:hidden rounded-full"
+                        className="block lg:hidden md:hidden rounded-full logo-mini"
                         src="/images/logos/logo.png"
                         alt="Car'Clean"
                         width={50}
@@ -61,7 +61,7 @@ function Layout({ title, children }: Props) {
                     </Link>
                   </div>
                   <div className="relative flex h-16 items-center justify-between">
-                    <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                    <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
                       {/* Mobile menu button*/}
                       <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-[#2F2F47] hover:bg-[#2F2F47] hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                         <span className="sr-only">Open main menu</span>
@@ -83,7 +83,7 @@ function Layout({ title, children }: Props) {
                         <div className="absolute top-0 left-10">
                           <Link href="/">
                             <Image
-                              className="hidden lg:block sm:block rounded-full"
+                              className="hidden lg:block md:block rounded-full"
                               src="/images/logos/logo.png"
                               alt="Car'Clean"
                               width={300}
@@ -104,9 +104,9 @@ function Layout({ title, children }: Props) {
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-center">
-                      <div className="hidden sm:ml-6 sm:block">
-                        <div className="flex space-x-4">
+                    <div className="flex flex-1 items-center justify-center md:items-stretch sm:justify-center">
+                      <div className="hidden md:ml-6 md:block">
+                        <div className="flex lg:space-x-4 md:space-x-0">
                           {navigation.map((item) => (
                             <Link
                               key={item.name}
@@ -115,7 +115,7 @@ function Layout({ title, children }: Props) {
                                 item.current
                                   ? 'text-[#2F2F47] font-extrabold'
                                   : 'text-[#2f2f47] font-semibold hover:text-white',
-                                'px-3 py-2'
+                                'md:px-2 lg:px-3 py-2 md:text-sm lg:text-base'
                               )}
                               aria-current={item.current ? 'page' : undefined}
                             >
