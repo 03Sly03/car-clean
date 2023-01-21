@@ -2,14 +2,14 @@ import { Fragment } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { ToastContainer } from 'react-toastify';
-// import { useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import 'react-toastify/dist/ReactToastify.css';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import Image from 'next/image';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon, UserIcon } from '@heroicons/react/24/outline';
 
 const navigation = [
-  { name: 'Accueil', href: '/', current: true },
+  { name: 'Accueil', href: '/', current: false },
   { name: 'Contact', href: '#', current: false },
   { name: "Véhicules d'occasion", href: '/usedVehicles', current: false },
   { name: 'A propos', href: '#', current: false },
@@ -25,7 +25,11 @@ type Props = {
 };
 
 function Layout({ title, children }: Props) {
-  // const { status, data: session } = useSession();
+  const { status, data: session } = useSession();
+
+  navigation.filter((page) =>
+    title === page.name ? (page.current = true) : (page.current = false)
+  );
 
   return (
     <>
@@ -43,8 +47,6 @@ function Layout({ title, children }: Props) {
 
       <div className="flex min-h-screen flex-col justify-between">
         <header>
-          {/* TEST NAV */}
-
           <Disclosure as="nav" className="bg-[#EF7937] mb-20">
             {({ open }) => (
               <>
@@ -113,7 +115,7 @@ function Layout({ title, children }: Props) {
                               href={item.href}
                               className={classNames(
                                 item.current
-                                  ? 'text-[#2F2F47] font-extrabold'
+                                  ? 'text-[#2F2F47] font-extrabold underline underline-offset-8'
                                   : 'text-[#2f2f47] font-semibold hover:text-white',
                                 'md:px-2 lg:px-3 py-2 md:text-sm lg:text-base'
                               )}
@@ -127,12 +129,15 @@ function Layout({ title, children }: Props) {
                     </div>
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                       <Link href="https://fr-fr.facebook.com" target="_blank">
-                        <Image
-                          src="/images/logos/fbSvg.svg"
-                          alt="logo facebook"
-                          width={60}
-                          height={60}
-                        ></Image>
+                        <div className="rounded-full h-11 w-11 flex items-center justify-center">
+                          <Image
+                            src="/images/logos/fbSvg.svg"
+                            alt="logo facebook"
+                            width={60}
+                            height={60}
+                            className="h-11 w-11 hover:h-14 hover:w-14"
+                          />
+                        </div>
                       </Link>
                       {/* <button
                         type="button"
@@ -141,73 +146,112 @@ function Layout({ title, children }: Props) {
                         <span className="sr-only">View notifications</span>
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
                       </button> */}
-                      <p className="text-[#2f2f47] font-semibold">Romuald</p>
-                      {/* Profile dropdown */}
-                      <Menu as="div" className="relative ml-3">
+                      {/* TEST CODE LOGIN ACTION */}
+                      {/* <div>
+
+                <Menu as="div" className="relative inline-block">
+                  <Menu.Button className="text-blue-500">
+                    
+                  </Menu.Button>
+                  <Menu.Items className="bg-white absolute right-0 w-56 origin-top-right shadow-lg">
+                    <Menu.Item>
+                      <DropdownLink href="/profile">Profile</DropdownLink>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <DropdownLink href="/profile">
+                        Historique des commandes
+                      </DropdownLink>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <Link href="#">Se déconnecter</Link>
+                    </Menu.Item>
+                  </Menu.Items>
+                </Menu>
+              
+            </div> */}
+                      {/* END TEST CODE LOGIN ACTION */}
+                      {status === 'loading' ? (
+                        'Loading'
+                      ) : session?.user ? (
                         <div>
-                          <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                            <span className="sr-only">Open user menu</span>
-                            <Image
-                              className="h-8 w-8 rounded-full"
-                              src="/images/avatars/mustang.jpg"
-                              alt=""
-                              width={100}
-                              height={100}
-                            />
-                          </Menu.Button>
+                          <p className="text-[#2f2f47] font-semibold">
+                            {session.user.name}
+                          </p>
+                          <Menu as="div" className="relative ml-3">
+                            <div>
+                              <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                <span className="sr-only">Open user menu</span>
+                                <Image
+                                  className="h-8 w-8 rounded-full"
+                                  src="/images/avatars/mustang.jpg"
+                                  alt=""
+                                  width={100}
+                                  height={100}
+                                />
+                              </Menu.Button>
+                            </div>
+                            <Transition
+                              as={Fragment}
+                              enter="transition ease-out duration-100"
+                              enterFrom="transform opacity-0 scale-95"
+                              enterTo="transform opacity-100 scale-100"
+                              leave="transition ease-in duration-75"
+                              leaveFrom="transform opacity-100 scale-100"
+                              leaveTo="transform opacity-0 scale-95"
+                            >
+                              <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <Link
+                                      href="#"
+                                      className={classNames(
+                                        active ? 'bg-gray-100' : '',
+                                        'block px-4 py-2 text-sm text-gray-700'
+                                      )}
+                                    >
+                                      Your Profile
+                                    </Link>
+                                  )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <Link
+                                      href="#"
+                                      className={classNames(
+                                        active ? 'bg-gray-100' : '',
+                                        'block px-4 py-2 text-sm text-gray-700'
+                                      )}
+                                    >
+                                      Settings
+                                    </Link>
+                                  )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <Link
+                                      href="#"
+                                      className={classNames(
+                                        active ? 'bg-gray-100' : '',
+                                        'block px-4 py-2 text-sm text-gray-700'
+                                      )}
+                                    >
+                                      Sign out
+                                    </Link>
+                                  )}
+                                </Menu.Item>
+                              </Menu.Items>
+                            </Transition>
+                          </Menu>
                         </div>
-                        <Transition
-                          as={Fragment}
-                          enter="transition ease-out duration-100"
-                          enterFrom="transform opacity-0 scale-95"
-                          enterTo="transform opacity-100 scale-100"
-                          leave="transition ease-in duration-75"
-                          leaveFrom="transform opacity-100 scale-100"
-                          leaveTo="transform opacity-0 scale-95"
-                        >
-                          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            <Menu.Item>
-                              {({ active }) => (
-                                <Link
-                                  href="#"
-                                  className={classNames(
-                                    active ? 'bg-gray-100' : '',
-                                    'block px-4 py-2 text-sm text-gray-700'
-                                  )}
-                                >
-                                  Your Profile
-                                </Link>
-                              )}
-                            </Menu.Item>
-                            <Menu.Item>
-                              {({ active }) => (
-                                <Link
-                                  href="#"
-                                  className={classNames(
-                                    active ? 'bg-gray-100' : '',
-                                    'block px-4 py-2 text-sm text-gray-700'
-                                  )}
-                                >
-                                  Settings
-                                </Link>
-                              )}
-                            </Menu.Item>
-                            <Menu.Item>
-                              {({ active }) => (
-                                <Link
-                                  href="#"
-                                  className={classNames(
-                                    active ? 'bg-gray-100' : '',
-                                    'block px-4 py-2 text-sm text-gray-700'
-                                  )}
-                                >
-                                  Sign out
-                                </Link>
-                              )}
-                            </Menu.Item>
-                          </Menu.Items>
-                        </Transition>
-                      </Menu>
+                      ) : (
+                        <div>
+                          <Link className="p-2" href="/login">
+                            <div className="flex items-center justify-center h-11 w-11 rounded-full">
+                              <UserIcon className="h-7 w-7 hover:h-9 hover:w-9" />
+                            </div>
+                          </Link>
+                        </div>
+                      )}{' '}
                     </div>
                   </div>
                 </div>
@@ -235,8 +279,6 @@ function Layout({ title, children }: Props) {
               </>
             )}
           </Disclosure>
-
-          {/* END TEST NAV */}
 
           {/* <nav className="flex h-16 items-center px-4 justify-between shadow-md bg-[#EF7937] mb-24">
             <div className="relative w-28 h-28">
@@ -313,6 +355,7 @@ function Layout({ title, children }: Props) {
               alt="logo facebook"
               width={60}
               height={60}
+              className="h-11 w-11 hover:h-14 hover:w-14"
             ></Image>
           </Link>
           <p className="text-sm">

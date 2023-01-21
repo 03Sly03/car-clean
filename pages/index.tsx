@@ -4,7 +4,7 @@ import Layout from '../components/Layout';
 
 export default function Home() {
   return (
-    <Layout title="Page d'accueil">
+    <Layout title="Accueil">
       <div className="promo relative">
         <img
           src="/images/promos/pneus.jpg"

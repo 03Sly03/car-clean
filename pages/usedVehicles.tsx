@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function UsedVehicles() {
   return (
-    <Layout title="Véhicule d'occasion">
+    <Layout title="Véhicules d'occasion">
       <Link
         href="/"
         className="font-extrabold bg-[#2F2F47] text-white p-3 rounded-xl"
