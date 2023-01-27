@@ -5,7 +5,12 @@ import { NextComponentType } from 'next';
 import { useRouter } from 'next/router';
 
 type CustomAppProps = AppProps & {
-  Component: NextComponentType & { auth?: boolean };
+  Component: NextComponentType & {
+    auth?: {
+      isAuth?: boolean;
+      adminOnly: boolean;
+    };
+  };
 };
 
 export default function App({
@@ -15,7 +20,7 @@ export default function App({
   return (
     <SessionProvider session={session}>
       {Component.auth ? (
-        <Auth>
+        <Auth adminOnly={Component.auth.adminOnly}>
           <Component {...pageProps} />
         </Auth>
       ) : (
@@ -26,12 +31,13 @@ export default function App({
 }
 
 type Props = {
+  adminOnly: boolean;
   children: JSX.Element | JSX.Element[];
 };
 
-function Auth({ children }: Props) {
+function Auth({ children, adminOnly }: Props) {
   const router = useRouter();
-  const { status } = useSession({
+  const { status, data: session } = useSession({
     required: true,
     onUnauthenticated() {
       router.push('/unauthorized?message=Veuillez vous connecter');
@@ -39,6 +45,9 @@ function Auth({ children }: Props) {
   });
   if (status === 'loading') {
     return <div>Loading...</div>;
+  }
+  if (adminOnly && !session.user.isAdmin) {
+    router.push('/unauthorized?message=admin login required');
   }
   return <>{children}</>;
 }
