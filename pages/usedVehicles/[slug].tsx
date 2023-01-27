@@ -1,15 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 // import Image from 'next/legacy/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React from 'react';
 import Layout from '../../components/Layout';
-import data from '../../utils/data';
+import Car from '../../models/Car';
+import db from '../../utils/db';
 
-function CarScreen() {
-  const { query } = useRouter();
-  const { slug } = query;
-  const car = data.cars.find((x) => x.slug === slug);
+function CarScreen(props: any) {
+  const { car } = props;
   if (!car) {
     return <div>voiture non trouvé</div>;
   }
@@ -60,3 +58,18 @@ function CarScreen() {
 }
 
 export default CarScreen;
+
+export async function getServerSideProps(context: any) {
+  const { params } = context;
+  const { slug } = params;
+  console.log('le slug: ', slug);
+
+  await db.connect();
+  const car = await Car.findOne({ slug }).lean();
+  await db.disconnect();
+  return {
+    props: {
+      car: car ? db.convertDocToObj(car) : null,
+    },
+  };
+}
