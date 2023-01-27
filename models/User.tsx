@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
 
+mongoose.set('strictQuery', false);
+
 const usersSchema = new mongoose.Schema(
   {
-    id: { type: String, required: true },
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },

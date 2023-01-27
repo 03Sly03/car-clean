@@ -4,22 +4,26 @@ import db from '../../../utils/db';
 import bcryptjs from 'bcryptjs';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-type ExtendedUserType = (typeof User & { isAdmin?: string }) | undefined;
+type ExtendedUserType =
+  | (typeof User & { isAdmin?: string; _id: string })
+  | undefined;
 
 export default NextAuth({
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60,
   },
   callbacks: {
     async jwt({ token, user }) {
-      console.log('le user bidule turcmushe: ', user);
-      if (user?.id) token.id = user.id;
+      if ((user as ExtendedUserType)?._id)
+        token._id = (user as ExtendedUserType)?._id;
       if ((user as ExtendedUserType)?.isAdmin)
         token.isAdmin = (user as ExtendedUserType)?.isAdmin;
       return token;
     },
     async session({ session, token }) {
-      if (token?.id) session.user.id = token.id;
+      if (token?._id) session.user._id = token._id;
       if (token?.isAdmin) session.user.isAdmin = token.isAdmin;
       return session;
     },
@@ -42,6 +46,7 @@ export default NextAuth({
         ) {
           return {
             id: user.id,
+            _id: user.id,
             name: user.name,
             email: user.email,
             image: 'f',

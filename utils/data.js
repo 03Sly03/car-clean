@@ -3,23 +3,14 @@ import bcrypt from 'bcryptjs';
 const data = {
   users: [
     {
-      id: '987654',
-      name: 'John',
+      name: 'Romuald',
       email: 'admin@example.com',
       password: bcrypt.hashSync('123456'),
       isAdmin: true,
     },
-    {
-      id: '456789',
-      name: 'Danna',
-      email: 'user@example.com',
-      password: bcrypt.hashSync('123456'),
-      isAdmin: false,
-    },
   ],
   cars: [
     {
-      id: 1234,
       slug: 'renaut-laguna',
       category: 'voiture',
       image: '/images/cars/laguna.webp',
@@ -32,7 +23,6 @@ const data = {
       price: 2590,
     },
     {
-      id: 2345,
       slug: 'clio2',
       category: 'voiture',
       image: '/images/cars/clio2.webp',
@@ -45,7 +35,6 @@ const data = {
       price: 1500,
     },
     {
-      id: 3456,
       slug: '307',
       category: 'voiture',
       image: '/images/cars/307.webp',
@@ -58,7 +47,6 @@ const data = {
       price: 6900,
     },
     {
-      id: 4567,
       slug: '405',
       category: 'voiture',
       image: '/images/cars/405.webp',
@@ -71,7 +59,6 @@ const data = {
       price: 3500,
     },
     {
-      id: 5678,
       slug: 'opel-astra-ecoflex',
       category: 'voiture',
       image: '/images/cars/astraEcoFlex.webp',
@@ -84,7 +71,6 @@ const data = {
       price: 11990,
     },
     {
-      id: 6789,
       slug: 'citroen-c3',
       category: 'voiture',
       image: '/images/cars/c3picasso.webp',
@@ -97,7 +83,6 @@ const data = {
       price: 7490,
     },
     {
-      id: 7890,
       slug: 'chevrolet-captiva',
       category: 'voiture',
       image: '/images/cars/captiva.webp',
@@ -110,7 +95,6 @@ const data = {
       price: 11990,
     },
     {
-      id: 8901,
       slug: 'fiat-500',
       category: 'voiture',
       image: '/images/cars/f500.webp',
