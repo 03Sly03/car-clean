@@ -207,26 +207,26 @@ function Layout({ title, children }: Props) {
                                 <Menu.Item>
                                   {({ active }) => (
                                     <Link
-                                      href="#"
+                                      href="/profile"
                                       className={classNames(
                                         active ? 'bg-gray-100' : '',
                                         'block px-4 py-2 text-sm text-gray-700'
                                       )}
                                     >
-                                      Your Profile
+                                      Profile
                                     </Link>
                                   )}
                                 </Menu.Item>
                                 <Menu.Item>
                                   {({ active }) => (
                                     <Link
-                                      href="#"
+                                      href="/settings"
                                       className={classNames(
                                         active ? 'bg-gray-100' : '',
                                         'block px-4 py-2 text-sm text-gray-700'
                                       )}
                                     >
-                                      Settings
+                                      Paramètres
                                     </Link>
                                   )}
                                 </Menu.Item>
@@ -240,7 +240,7 @@ function Layout({ title, children }: Props) {
                                       )}
                                       onClick={logoutClickHandler}
                                     >
-                                      Sign out
+                                      Se deconnecter
                                     </Link>
                                   )}
                                 </Menu.Item>

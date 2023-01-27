@@ -39,7 +39,7 @@ a {
 }
 
 .primary-button {
-  @apply rounded bg-amber-300 py-2 px-4 shadow outline-none hover:bg-amber-400 active:bg-amber-500;
+  @apply rounded bg-[#ef7937] py-2 px-4 shadow outline-none hover:bg-[#ff823a] active:bg-[#2f2f47] active:text-white;
 }
 
 input,
