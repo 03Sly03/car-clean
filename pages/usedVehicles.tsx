@@ -1,9 +1,16 @@
 import Layout from '../components/Layout';
 import CarItem from '../components/CarItem';
-import data from '../utils/data';
+// import data from '../utils/data';
 import Link from 'next/link';
+import db from '../utils/db';
+import Car from '../models/Car';
+import { CarData } from '../src/types/datas';
 
-export default function UsedVehicles() {
+type Props = {
+  cars: CarData[];
+};
+
+export default function UsedVehicles({ cars }: Props) {
   return (
     <Layout title="Véhicules d'occasion">
       <Link
@@ -13,10 +20,20 @@ export default function UsedVehicles() {
         Retour
       </Link>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 mt-10">
-        {data.cars.map((car) => (
+        {cars.map((car) => (
           <CarItem car={car} key={car.slug} />
         ))}
       </div>
     </Layout>
   );
+}
+
+export async function getServerSideProps() {
+  await db.connect();
+  const cars = await Car.find().lean();
+  return {
+    props: {
+      cars: cars.map(db.convertDocToObj),
+    },
+  };
 }
