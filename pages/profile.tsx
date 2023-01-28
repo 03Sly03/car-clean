@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { signIn, useSession } from 'next-auth/react';
+import Link from 'next/link';
 import React, { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -47,6 +48,7 @@ function ProfileScreen() {
         password,
       });
       toast.success('Le profile à bien été mis à jour');
+
       if (result?.error) {
         toast.error(result.error);
       }
@@ -57,6 +59,11 @@ function ProfileScreen() {
 
   return (
     <Layout title="Profile">
+      <div className="mb-4">
+        <Link className="card w-36 text-center p-2" href={`/`}>
+          Retour à l'accueil
+        </Link>
+      </div>
       <form
         className="mx-auto max-w-screen-md"
         onSubmit={handleSubmit(submitHandler)}
@@ -88,7 +95,6 @@ function ProfileScreen() {
             type="email"
             id="email"
             className="w-full"
-            autoFocus
           />
           {errors.email && (
             <div className="text-red-500">{errors.email.message}</div>

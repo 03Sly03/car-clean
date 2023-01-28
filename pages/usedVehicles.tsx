@@ -13,16 +13,18 @@ type Props = {
 export default function UsedVehicles({ cars }: Props) {
   return (
     <Layout title="Véhicules d'occasion">
-      <Link
-        href="/"
-        className="font-extrabold bg-[#2F2F47] text-white p-3 rounded-xl"
-      >
-        Retour
-      </Link>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 mt-10">
-        {cars.map((car) => (
-          <CarItem car={car} key={car.slug} />
-        ))}
+      <div className="mb-20">
+        <Link
+          href="/"
+          className="font-extrabold bg-[#2F2F47] text-white p-3 rounded-xl"
+        >
+          Retour
+        </Link>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 mt-10">
+          {cars.map((car) => (
+            <CarItem car={car} key={car.slug} />
+          ))}
+        </div>
       </div>
     </Layout>
   );

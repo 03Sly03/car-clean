@@ -106,7 +106,7 @@ function AdminDashboardScreen() {
               <div className="grid grid-cols-1 md:grid-cols-4">
                 <div className="card m-5 p-5">
                   <p className="text-3xl">{summary.carsCount} </p>
-                  <p>Voiures</p>
+                  <p>Véhicules</p>
                   <Link href="/admin/cars">Voir</Link>
                 </div>
                 <div className="card m-5 p-5">

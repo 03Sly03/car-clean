@@ -12,7 +12,7 @@ const navigation = [
   { name: 'Accueil', href: '/', current: false },
   { name: 'Contact', href: '/contact', current: false },
   { name: "Véhicules d'occasion", href: '/usedVehicles', current: false },
-  { name: 'Réparation', href: 'maintenance', current: false },
+  { name: 'Réparation', href: '/maintenance', current: false },
 ];
 
 function classNames<T>(...classes: T[]) {

@@ -83,7 +83,6 @@ function LoginScreen() {
             type="password"
             id="password"
             className="w-full"
-            autoFocus
           />
           {errors.password && (
             <div className="text-red-500">{errors.password.message}</div>

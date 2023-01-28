@@ -10,3 +10,11 @@ export interface CarData {
   description: string;
   price: number;
 }
+
+export interface UserData {
+  _id: string;
+  name: string;
+  email: string;
+  image: string;
+  isAdmin: boolean;
+}
