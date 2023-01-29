@@ -7,7 +7,7 @@ function AirConditionerScreen() {
     <Layout title="Maintenance" subtitle="Recharge de climatisation">
       <div className="flex flex-col md:flex-row mt-20">
         <RepairSideMenu title="Recharge de climatisation" />
-        <div className="flex w-full justify-center">
+        <div className="grid grid-cols-1 w-full space-y-10 p-10 lg:mx-20">
           <div className="flex flex-col space-y-10">
             <h1 className="text-2xl font-bold text-center">
               Recharge de climatisation

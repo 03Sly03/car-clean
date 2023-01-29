@@ -8,7 +8,7 @@ function MaintenanceScreen() {
       <div className="flex flex-col md:flex-row mt-20">
         <RepairSideMenu title="Maintenance" />
         <div className="flex w-full justify-center">
-          <div className="flex flex-col space-y-10">
+          <div className="grid grid-cols-1 w-full space-y-10 p-10 lg:mx-20">
             <h1 className="text-2xl font-bold text-center">
               Entretient courrant
             </h1>
