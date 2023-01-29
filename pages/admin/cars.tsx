@@ -161,7 +161,7 @@ export default function AdminProdcutsScreen() {
                       <td className=" p-5 ">{car.year}</td>
                       <td className=" p-5 ">{car.mileage}</td>
                       <td className=" p-5">
-                        <div className="bg-[#2f2f47] rounded-full p-3 text-center text-white w-20">
+                        <div className="bg-[#2f2f47] rounded-full p-3 text-center text-white w-24">
                           {car.price} €
                         </div>
                       </td>

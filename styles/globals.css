@@ -52,6 +52,10 @@ textarea {
   @apply flex p-2 hover:bg-gray-200;
 }
 
+.contactMessage {
+  min-width: 240px;
+}
+
 @media (max-width: 420px) {
   .logo-mini {
     display: none;
