@@ -29,7 +29,7 @@ export default function Home() {
             </h2>
           </div>
         </Link>
-        <Link href="/maintenance">
+        <Link href="/repair">
           <div className="hover:scale-105 h-52 w-auto bg-[#2f2f4757] flex items-center justify-center shadow-lg shadow-gray-500 rounded-tl-[100px] rounded-br-[100px] m-5 relative">
             <img
               src="/images/card-home/maintenance.jpg"

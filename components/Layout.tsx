@@ -12,7 +12,7 @@ const navigation = [
   { name: 'Accueil', href: '/', current: false },
   { name: 'Contact', href: '/contact', current: false },
   { name: "Véhicules d'occasion", href: '/usedVehicles', current: false },
-  { name: 'Réparation', href: '/maintenance', current: false },
+  { name: 'Maintenance', href: '/repair', current: false },
 ];
 
 function classNames<T>(...classes: T[]) {
@@ -21,10 +21,11 @@ function classNames<T>(...classes: T[]) {
 
 type Props = {
   title: string;
+  subtitle?: string;
   children: JSX.Element | JSX.Element[];
 };
 
-function Layout({ title, children }: Props) {
+function Layout({ title, subtitle, children }: Props) {
   const { status, data: session } = useSession();
 
   navigation.filter((page) =>
@@ -38,7 +39,11 @@ function Layout({ title, children }: Props) {
   return (
     <>
       <Head>
-        <title>{title ? title + " - Car'Clean" : "Car'Clean"}</title>
+        <title>
+          {title
+            ? `${title} ${subtitle ? subtitle : ''} - Car'Clean`
+            : "Car'Clean"}
+        </title>
         <meta
           name="description"
           content="Garge automobile et vente de véhicules d'occasion"

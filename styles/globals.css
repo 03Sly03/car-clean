@@ -39,12 +39,17 @@ a {
   height: 496px;
 }
 
-.promo {
-  @apply m-2 block rounded-tl-[200px] rounded-br-[200px] shadow-md h-52 w-auto;
+.card-maintenance {
+  width: 500px;
+  height: auto;
 }
 
 .card {
   @apply m-2 block rounded-lg border bg-[#2f2f47] shadow-md text-white;
+}
+
+.promo {
+  @apply m-2 block rounded-tl-[200px] rounded-br-[200px] shadow-md h-52 w-auto;
 }
 
 .primary-button {
