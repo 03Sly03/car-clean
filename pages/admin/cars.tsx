@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useReducer } from 'react';
 import { toast } from 'react-toastify';
+import AdminSideMenu from '../../components/AdminSideMenu';
 import Layout from '../../components/Layout';
 import { getError } from '../../utils/error';
 
@@ -96,22 +97,8 @@ export default function AdminProdcutsScreen() {
   };
   return (
     <Layout title="Admin Cars">
-      <div className="grid md:grid-cols-4 md:gap-5">
-        <div>
-          <ul className="p-5 m-2 block shadow-lg h-auto w-40 space-y-5">
-            <li>
-              <Link href="/admin/dashboard">Tableau de bord</Link>
-            </li>
-            <li>
-              <Link href="/admin/cars" className="font-bold">
-                Véhicules
-              </Link>
-            </li>
-            <li>
-              <Link href="/admin/users">Utilisateurs</Link>
-            </li>
-          </ul>
-        </div>
+      <div className="grid md:grid-cols-4 md:gap-5 mb-20">
+        <AdminSideMenu title="Véhicules" />
         <div className="overflow-x-auto md:col-span-3">
           <div className="flex justify-between">
             <h1 className="mb-4 text-xl">Véhicules</h1>

@@ -14,13 +14,14 @@ type FormValues = {
 
 function LoginScreen() {
   const { data: session } = useSession();
-
   const router = useRouter();
   const { redirect }: any = router.query;
 
   useEffect(() => {
     if (session?.user) {
-      router.push(redirect || '/');
+      session.user.isAdmin
+        ? router.push(redirect || '/admin/dashboard')
+        : router.push(redirect || '/');
     }
   }, [router, session, redirect]);
 

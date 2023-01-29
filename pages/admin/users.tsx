@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useReducer } from 'react';
 import { toast } from 'react-toastify';
+import AdminSideMenu from '../../components/AdminSideMenu';
 import Layout from '../../components/Layout';
 import { getError } from '../../utils/error';
 
@@ -97,22 +98,8 @@ function AdminUsersScreen() {
 
   return (
     <Layout title="Admin Users">
-      <div className="grid md:grid-cols-4 md:gap-5">
-        <div>
-          <ul>
-            <li>
-              <Link href="/admin/dashboard">Tableau de bord</Link>
-            </li>
-            <li>
-              <Link href="/admin/cars">Véhicules</Link>
-            </li>
-            <li>
-              <Link href="/admin/users" className="font-bold">
-                Utilisateurs
-              </Link>
-            </li>
-          </ul>
-        </div>
+      <div className="grid md:grid-cols-4 md:gap-5 mb-20">
+        <AdminSideMenu title="Utilisateurs" />
         <div className="overflow-x-auto md:col-span-3">
           <div className="flex justify-between">
             <h1 className="mb-4 text-xl">Utilisateurs</h1>

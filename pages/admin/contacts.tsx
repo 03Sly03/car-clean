@@ -1,8 +1,9 @@
 import axios from 'axios';
-import Link from 'next/link';
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { toast } from 'react-toastify';
+import AdminSideMenu from '../../components/AdminSideMenu';
 import Layout from '../../components/Layout';
+import { UserData } from '../../src/types/datas';
 import { getError } from '../../utils/error';
 
 function reducer(state: any, action: any) {
@@ -28,6 +29,7 @@ function reducer(state: any, action: any) {
 }
 
 function AdminContactsScreen() {
+  const [users, setUsers] = useState<UserData[]>([]);
   const [{ loading, error, contacts, successDelete, loadingDelete }, dispatch] =
     useReducer(reducer, {
       loading: true,
@@ -36,6 +38,11 @@ function AdminContactsScreen() {
     });
 
   useEffect(() => {
+    const usersData = async () => {
+      const { data } = await axios.get(`/api/admin/users`);
+      setUsers(data);
+    };
+    usersData();
     const fetchData = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
@@ -67,28 +74,12 @@ function AdminContactsScreen() {
     }
   };
 
+  const usersMail = users.map((user) => user.email);
+
   return (
     <Layout title="Contacts">
       <div className="grid md:grid-cols-4 md:gap-5 mb-20">
-        <div>
-          <ul>
-            <li>
-              <Link href="/admin/dashboard">Tableau de bord</Link>
-            </li>
-            <li>
-              <Link href="/admin/cars">Véhicules</Link>
-            </li>
-            <li>
-              <Link href="/admin/users">Utilisateurs</Link>
-            </li>
-            <li>
-              <Link href="/admin/contacts" className="font-bold">
-                Contacts
-              </Link>
-            </li>
-          </ul>
-        </div>
-
+        <AdminSideMenu title="Contacts" />
         <div className="overflow-x-auto md:col-span-3">
           <div className="flex justify-between">
             <h1 className="mb-4 text-xl">Utilisateurs</h1>
@@ -105,6 +96,7 @@ function AdminContactsScreen() {
                   <tr>
                     <th className="px-5 text-left">ID</th>
                     <th className="p-5 text-left">NOM</th>
+                    <th className="p-5 text-left">INSCRIS</th>
                     <th className="p-5 text-left">EMAIL</th>
                     <th className="p-5 text-left">MESSAGE</th>
                     <th className="p-5 text-left">ACTIONS</th>
@@ -112,11 +104,25 @@ function AdminContactsScreen() {
                 </thead>
                 <tbody>
                   {contacts.map((contact: any) => (
-                    <tr key={contact._id} className="border-b">
+                    <tr
+                      key={contact._id}
+                      className={`border-b ${
+                        usersMail.find((email) => email === contact.email)
+                          ? 'bg-green-100'
+                          : ''
+                      }`}
+                    >
                       <td className=" p-5 align-text-top">
                         {contact._id.substring(20, 24)}
                       </td>
                       <td className=" p-5 align-text-top">{contact.name}</td>
+                      <td className=" p-5 align-text-top">
+                        <>
+                          {usersMail.find((email) => email === contact.email)
+                            ? 'OUI'
+                            : 'NON'}
+                        </>
+                      </td>
                       <td className=" p-5 align-text-top">{contact.email}</td>
                       <td className=" p-5 align-text-top">
                         {contact.contactMessage.map(

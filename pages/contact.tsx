@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import Layout from '../components/Layout';
@@ -20,6 +20,7 @@ function ContactScreen() {
     register,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<FormValues>();
 
   const submitHandler: SubmitHandler<FormValues> = async ({
@@ -38,6 +39,15 @@ function ContactScreen() {
       toast.error(getError(err));
     }
   };
+
+  const usersSession = session?.user!;
+
+  useEffect(() => {
+    if (usersSession) {
+      setValue('name', usersSession.name);
+      setValue('email', usersSession.email);
+    }
+  }, [usersSession, setValue]);
 
   return (
     <Layout title="Contact">
@@ -62,7 +72,6 @@ function ContactScreen() {
             {...register('name', {
               required: 'Entrez votre nom',
             })}
-            value={session ? session.user.name : ''}
           />
           {errors.name && (
             <div className="text-red-500">{errors.name.message}</div>
@@ -81,7 +90,6 @@ function ContactScreen() {
             })}
             className="w-full"
             id="email"
-            value={session ? session.user.email : ''}
           ></input>
           {errors.email && (
             <div className="text-red-500">{errors.email.message}</div>

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Link from 'next/link';
 import React, { useEffect, useReducer } from 'react';
+import AdminSideMenu from '../../components/AdminSideMenu';
 import Layout from '../../components/Layout';
 import { getError } from '../../utils/error';
 
@@ -23,14 +24,14 @@ import { getError } from '../../utils/error';
 //   };
 // };
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top',
-    },
-  },
-};
+// export const options = {
+//   responsive: true,
+//   plugins: {
+//     legend: {
+//       position: 'top',
+//     },
+//   },
+// };
 
 const reducer = (state: any, action: any) => {
   switch (action.type) {
@@ -79,25 +80,8 @@ function AdminDashboardScreen() {
 
   return (
     <Layout title="Tableau de bord">
-      <div className="grid  md:grid-cols-4 md:gap-5">
-        <div>
-          <ul>
-            <li>
-              <Link href="/admin/dashboard" className="font-bold">
-                Tableau de bord
-              </Link>
-            </li>
-            <li>
-              <Link href="/admin/cars">Voitures</Link>
-            </li>
-            <li>
-              <Link href="/admin/users">Utilisateurs</Link>
-            </li>
-            <li>
-              <Link href="/admin/contacts">Contacts</Link>
-            </li>
-          </ul>
-        </div>
+      <div className="grid  md:grid-cols-4 md:gap-5 mb-20">
+        <AdminSideMenu title="Tableau de bord" />
         <div className="md:col-span-3">
           <h1 className="mb-4 text-xl">Tableau de bord</h1>
           {loading ? (
@@ -107,21 +91,24 @@ function AdminDashboardScreen() {
           ) : (
             <div>
               <div className="grid grid-cols-1 md:grid-cols-4">
-                <div className="card m-5 p-5">
-                  <p className="text-3xl">{summary.carsCount} </p>
-                  <p>Véhicules</p>
-                  <Link href="/admin/cars">Voir</Link>
-                </div>
-                <div className="card m-5 p-5">
-                  <p className="text-3xl">{summary.usersCount} </p>
-                  <p>Utilisateurs</p>
-                  <Link href="/admin/users">Voir</Link>
-                </div>
-                <div className="card m-5 p-5">
-                  <p className="text-3xl">{summary.contactsCount} </p>
-                  <p>Contacts</p>
-                  <Link href="/admin/contacts">Voir</Link>
-                </div>
+                <Link href="/admin/cars">
+                  <div className="card m-5 p-5">
+                    <p className="text-3xl">{summary.carsCount} </p>
+                    <p>Véhicules</p>
+                  </div>
+                </Link>
+                <Link href="/admin/users">
+                  <div className="card m-5 p-5">
+                    <p className="text-3xl">{summary.usersCount} </p>
+                    <p>Utilisateurs</p>
+                  </div>
+                </Link>
+                <Link href="/admin/contacts">
+                  <div className="card m-5 p-5">
+                    <p className="text-3xl">{summary.contactsCount} </p>
+                    <p>Contacts</p>
+                  </div>
+                </Link>
               </div>
             </div>
           )}
