@@ -47,9 +47,13 @@ function CarScreen(props: any) {
                 {/* <div className="mb-2 flex justify-between">
               <div>Status</div>
             </div> */}
-                <button className="bg-[#EF7937] w-full rounded-3xl font-bold p-2">
-                  Ou aller voir cette voiture ?
-                </button>
+                <Link
+                  href={`/contact?message=Vous avez une question sur cette ${car.brand} ${car.model} ? Vous souhaitez en savoir plus ? Appelez-nous ou laissez nous un message. Nous vous répondrons au plus vite !`}
+                >
+                  <button className="bg-[#EF7937] w-full rounded-3xl font-bold p-2">
+                    Intéressé ?
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
