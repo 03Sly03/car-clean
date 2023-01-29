@@ -132,14 +132,18 @@ function Layout({ title, children }: Props) {
                       </div>
                     </div>
                     <div className="absolute inset-y-0 right-0 flex items-center pr-1 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                      <Link href="https://fr-fr.facebook.com" target="_blank">
+                      <Link
+                        href="https://fr-fr.facebook.com"
+                        target="_blank"
+                        className="hidden md:block"
+                      >
                         <div className="rounded-full h-11 w-11 flex items-center justify-center relative">
                           <Image
                             src="/images/logos/fbSvg.svg"
                             alt="logo facebook"
                             width={60}
                             height={60}
-                            className="h-11 w-11 hover:h-14 hover:w-14 absolute inset-y-0 md:left-0 invisible md:visible left-11"
+                            className="h-11 w-11 hover:h-14 hover:w-14 absolute inset-y-0 md:left-0 left-11"
                           />
                         </div>
                       </Link>

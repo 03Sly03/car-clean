@@ -57,11 +57,8 @@ function ContactScreen() {
 
   return (
     <Layout title="Contact">
-      <div className="flex items-center justify-center space-x-20 mb-20">
-        <form
-          className="mx-auto max-w-screen-md"
-          onSubmit={handleSubmit(submitHandler)}
-        >
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 mb-20 lg:space-x-20">
+        <form onSubmit={handleSubmit(submitHandler)}>
           {message ? (
             <>
               <p className="mb-4 font-semibold">{message}</p>
@@ -136,7 +133,7 @@ function ContactScreen() {
           </div>
         </form>
 
-        <div className="card-construction rounded-tl-[200px] rounded-br-[200px] relative">
+        <div className="card-contact-infos rounded-tl-[200px] rounded-br-[200px] relative h-56 mt-10 lg:mt-0 lg:h-auto">
           <img
             src="/images/underconstruction/image.avif"
             alt="Compte tour"
