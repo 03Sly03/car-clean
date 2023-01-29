@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useSession } from 'next-auth/react';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -13,6 +14,7 @@ type FormValues = {
 };
 
 function ContactScreen() {
+  const { data: session } = useSession();
   const {
     handleSubmit,
     register,
@@ -46,7 +48,7 @@ function ContactScreen() {
         className="mx-auto max-w-screen-md"
         onSubmit={handleSubmit(submitHandler)}
       >
-        <h1 className="mb-4 text-xl">Contactez nous</h1>
+        <h1 className="mb-4 text-2xl font-bold">Contactez nous</h1>
         <p className="mb-4">
           Vous avez une question ? N'hésitez pas à la poser ici !
         </p>
@@ -60,6 +62,7 @@ function ContactScreen() {
             {...register('name', {
               required: 'Entrez votre nom',
             })}
+            value={session ? session.user.name : ''}
           />
           {errors.name && (
             <div className="text-red-500">{errors.name.message}</div>
@@ -78,6 +81,7 @@ function ContactScreen() {
             })}
             className="w-full"
             id="email"
+            value={session ? session.user.email : ''}
           ></input>
           {errors.email && (
             <div className="text-red-500">{errors.email.message}</div>
