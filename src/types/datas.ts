@@ -43,3 +43,12 @@ export interface MaintenanceData {
     }
   ];
 }
+
+export interface PromotionData {
+  name: string;
+  serviceSlug: string;
+  serviceTitle: string;
+  serviceActivity: string;
+  serviceName: string;
+  reduction: number;
+}

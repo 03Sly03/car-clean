@@ -1,28 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import Layout from '../components/Layout';
-import data from '../utils/data';
+import PromotionBanner from '../components/PromotionBanner';
+import Promotion from '../models/Promotion';
+import { PromotionData } from '../src/types/datas';
+import db from '../utils/db';
 
-export default function Home() {
+type Props = {
+  promotion: PromotionData;
+};
+
+export default function Home({ promotion }: Props) {
   return (
     <Layout title="Accueil">
-      <Link href={`/maintenance/${data.promotion.serviceSlug}`}>
-        <div className="hover:scale-105 promo relative overflow-hidden">
-          <img
-            src="/images/promos/pneus.jpg"
-            alt="pneus de voiture"
-            className="object-contain h-full w-full"
-          />
-          <div className="absolute bottom-0 left-0 bg-[#2f2f47da] text-[#ef7a37] font-extrabold tracking-widest px-8 sm:px-16 py-5 mr-10 rounded-br-[200px] rounded-tl-[200px] text-center text-sm md:text-base">
-            <h2>
-              {data.promotion.name} - {data.promotion.serviceTitle}
-            </h2>
-            <p className="text-xl">{data.promotion.serviceActivity}</p>
-            <p>{data.promotion.serviceName}</p>
-            <p>-{data.promotion.reduction} %</p>
-          </div>
-        </div>
-      </Link>
+      <PromotionBanner promotion={promotion} />
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 mt-20 text-xl">
         <Link href="/usedVehicles">
           <div className="hover:scale-105 h-52 w-auto bg-[#ef7a3757] flex items-center justify-center shadow-lg shadow-gray-500 rounded-tl-[100px] rounded-br-[100px] m-5 relative">
@@ -135,4 +126,15 @@ export default function Home() {
       </div>
     </Layout>
   );
+}
+
+export async function getServerSideProps() {
+  await db.connect();
+  const promotions = await Promotion.find({ name: 'PROMOTION' }).lean();
+  await db.disconnect();
+  return {
+    props: {
+      promotion: db.convertDocToObj(promotions[0]),
+    },
+  };
 }

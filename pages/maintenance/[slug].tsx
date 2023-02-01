@@ -2,17 +2,16 @@ import React from 'react';
 import Layout from '../../components/Layout';
 import MaintenanceSideMenu from '../../components/MaintenanceSideMenu';
 import Maintenance from '../../models/Maintenance';
-import data from '../../utils/data';
+import Promotion from '../../models/Promotion';
 import db from '../../utils/db';
 
 function ActivityScreen(props: any) {
   const { maintenance } = props;
-  console.log('le maintenance: ', maintenance);
+  const { promotion } = props;
   if (!maintenance) {
     return <div>Activitée non trouvé</div>;
   }
 
-  const { promotion } = data;
   return (
     <Layout title="Maintenance">
       <div className="flex flex-col md:flex-row relative">
@@ -90,15 +89,19 @@ export default ActivityScreen;
 export async function getServerSideProps(context: any) {
   const { params } = context;
   const { slug } = params;
-  console.log('le slug: ', slug);
 
   await db.connect();
   const data = await Maintenance.findOne({ slug }).lean();
   const maintenance = JSON.stringify(data);
+  const promoData = await Promotion.find();
   await db.disconnect();
+
+  const stringifyPromoData = JSON.stringify(promoData[0]);
+
   return {
     props: {
       maintenance: maintenance ? JSON.parse(maintenance) : null,
+      promotion: JSON.parse(stringifyPromoData),
     },
   };
 }
