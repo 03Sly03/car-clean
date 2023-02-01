@@ -2,13 +2,23 @@ export interface CarData {
   _id: string;
   slug: string;
   category: string;
-  image: string;
+  images: string[];
   brand: string;
   model: string;
   year: number;
   mileage: number;
   description: string;
   price: number;
+  features: {
+    energy: string;
+    motorisation: string;
+    gearbox: string;
+    guarantee: string;
+    taxHorsePower: number;
+    dinHorses: number;
+    numberOfDoors: number;
+    numberOfPlaces: number;
+  };
 }
 
 export interface UserData {

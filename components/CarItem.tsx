@@ -12,7 +12,7 @@ function CarItem({ car }: Props) {
     <Link href={`/usedVehicles/${car.slug}`}>
       <div className="card hover:scale-110">
         <img
-          src={car.image}
+          src={car.images[0]}
           alt={`${car.brand} ${car.model}`}
           className="rounded shadow"
         />

@@ -152,37 +152,6 @@ function Layout({ title, subtitle, children }: Props) {
                           />
                         </div>
                       </Link>
-                      {/* <button
-                        type="button"
-                        className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                      >
-                        <span className="sr-only">View notifications</span>
-                        <BellIcon className="h-6 w-6" aria-hidden="true" />
-                      </button> */}
-                      {/* TEST CODE LOGIN ACTION */}
-                      {/* <div>
-
-                <Menu as="div" className="relative inline-block">
-                  <Menu.Button className="text-blue-500">
-                    
-                  </Menu.Button>
-                  <Menu.Items className="bg-white absolute right-0 w-56 origin-top-right shadow-lg">
-                    <Menu.Item>
-                      <DropdownLink href="/profile">Profile</DropdownLink>
-                    </Menu.Item>
-                    <Menu.Item>
-                      <DropdownLink href="/profile">
-                        Historique des commandes
-                      </DropdownLink>
-                    </Menu.Item>
-                    <Menu.Item>
-                      <Link href="#">Se déconnecter</Link>
-                    </Menu.Item>
-                  </Menu.Items>
-                </Menu>
-              
-            </div> */}
-                      {/* END TEST CODE LOGIN ACTION */}
                       {status === 'loading' ? (
                         'Loading'
                       ) : session?.user ? (
@@ -289,7 +258,7 @@ function Layout({ title, subtitle, children }: Props) {
                   </div>
                 </div>
 
-                <Disclosure.Panel className="sm:hidden">
+                <Disclosure.Panel className="md:hidden">
                   <div className="space-y-1 px-2 pt-2 pb-3">
                     {navigation.map((item) => (
                       <Disclosure.Button
@@ -312,73 +281,6 @@ function Layout({ title, subtitle, children }: Props) {
               </>
             )}
           </Disclosure>
-
-          {/* <nav className="flex h-16 items-center px-4 justify-between shadow-md bg-[#EF7937] mb-24">
-            <div className="relative w-28 h-28">
-              <Link
-                href="/"
-                className="text-lg font-bold absolute top-10 left-5"
-              >
-                <Image
-                  className="rounded-full"
-                  src="/images/logos/logo.png"
-                  alt="logo spiquick"
-                  width={100}
-                  height={100}
-                />
-              </Link>
-            </div>
-            <div className="flex space-x-16 items-center text-lg font-bold">
-              <div>
-                <Link href="/home">Accueil</Link>
-              </div>
-              <div>
-                <Link href="/home">Contact</Link>
-              </div>
-              <Link href="/home">Maintenance</Link>
-              <Link href="/home">Véhicules d'occasion</Link>
-              <Link href="/home">A propos</Link>
-              <Link href="https://fr-fr.facebook.com" target="_blank">
-                <Image
-                  src="/images/logos/fbSvg.svg"
-                  alt="logo facebook"
-                  width={60}
-                  height={60}
-                ></Image>
-              </Link>
-            </div>
-            <div>
-              {status === 'loading' ? (
-                'Loading'
-              ) : session?.user ? (
-                <Menu as="div" className="relative inline-block">
-                  <Menu.Button className="text-blue-500">
-                    {session.user.name}
-                  </Menu.Button>
-                  <Menu.Items className="bg-white absolute right-0 w-56 origin-top-right shadow-lg">
-                    <Menu.Item>
-                      <DropdownLink href="/profile">Profile</DropdownLink>
-                    </Menu.Item>
-                    <Menu.Item>
-                      <DropdownLink href="/profile">
-                        Historique des commandes
-                      </DropdownLink>
-                    </Menu.Item>
-                    <Menu.Item>
-                      <Link href="#">Se déconnecter</Link>
-                    </Menu.Item>
-                  </Menu.Items>
-                </Menu>
-              ) : (
-                <Link
-                  className="p-2 text-blue-600 hover:text-blue-800"
-                  href="/login"
-                >
-                  Se connecter
-                </Link>
-              )}
-            </div>
-          </nav> */}
         </header>
         <main className="container m-auto mt-4 px-4">{children}</main>
         <footer className="flex h-28 justify-center items-center shadow-inner bg-[#2f2f47] text-white flex-col space-y-2 md:flex-row">

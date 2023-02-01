@@ -6,6 +6,7 @@ const navigation = [
   { name: 'Véhicules', href: '/admin/cars', current: false },
   { name: 'Utilisateurs', href: '/admin/users', current: false },
   { name: 'Contacts', href: '/admin/contacts', current: false },
+  { name: 'Promotions', href: '/admin/promotions', current: false },
 ];
 
 function classNames<T>(...classes: T[]) {

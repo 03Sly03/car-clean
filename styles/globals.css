@@ -45,7 +45,7 @@ a {
 }
 
 .card {
-  @apply m-2 block rounded-lg border bg-[#2f2f47] shadow-md text-white;
+  @apply md:m-2 block rounded-lg border bg-[#2f2f47] shadow-md text-white;
 }
 
 .promo {
