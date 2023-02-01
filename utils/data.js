@@ -203,6 +203,243 @@ const data = {
       price: 5990,
     },
   ],
+  maintenance: [
+    {
+      slug: 'change-worn-parts',
+      title: 'Entretient courrant',
+      description: 'Bla bla test 1 lorem machin',
+      activities: [
+        {
+          name: 'Vidange',
+          description: 'La vidange pour la voiture et pis tout ça',
+          tasks: [
+            {
+              name: 'Filtre à huile & huile',
+              description: 'Faut au moins changer tout ça',
+              price: 0,
+              minPrice: 10,
+              time: [
+                {
+                  days: 0,
+                  hours: 1,
+                  minutes: 0,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: 'Entretient complet',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+          tasks: [
+            {
+              name: 'Filtre à huile & huile',
+              description: 'ça fait parti du completitude...',
+              price: 0,
+              minPrice: 10,
+              time: {
+                days: 0,
+                hours: 1,
+                minutes: 0,
+              },
+            },
+            {
+              name: 'Filtre à air',
+              description: 'Le filtre pour air du moteur hein',
+              price: 0,
+              minPrice: 10,
+              time: {
+                days: 0,
+                hours: 1,
+                minutes: 0,
+              },
+            },
+            {
+              name: 'Filtre à carburant',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+              price: 0,
+              minPrice: 10,
+              time: {
+                days: 0,
+                hours: 1,
+                minutes: 0,
+              },
+            },
+          ],
+        },
+        {
+          name: 'Freins',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+          tasks: [
+            {
+              name: 'Plaquettes avant',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+              price: 0,
+              minPrice: 15,
+              time: {
+                days: 0,
+                hours: 0,
+                minutes: 30,
+              },
+            },
+            {
+              name: 'Plaquettes arrière',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+              price: 0,
+              minPrice: 15,
+              time: {
+                days: 0,
+                hours: 0,
+                minutes: 30,
+              },
+            },
+            {
+              name: 'Purge',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+              price: 0,
+              minPrice: 40,
+              time: {
+                days: 0,
+                hours: 0,
+                minutes: 30,
+              },
+            },
+          ],
+        },
+      ],
+    },
+    {
+      slug: 'air-conditioner',
+      title: 'Climatisation',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+      activities: [
+        {
+          name: 'Recharge',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+          tasks: [
+            {
+              name: 'Ajout du fluide frigorigène',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+              price: 0,
+              minPrice: 50,
+              time: {
+                days: 0,
+                hours: 2,
+                minutes: 30,
+              },
+            },
+            {
+              name: 'Détection de fuite',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+              price: 0,
+              minPrice: 30,
+              completionTime: {
+                days: 0,
+                hours: 1,
+                minutes: 15,
+              },
+            },
+          ],
+        },
+      ],
+    },
+    {
+      slug: 'tires',
+      title: 'Pneumatique',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+      activities: [
+        {
+          name: 'Changement des pneus',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+          tasks: [
+            {
+              name: 'Montage pneus',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+              price: 0,
+              minPrice: 50,
+              time: {
+                days: 0,
+                hours: 2,
+                minutes: 30,
+              },
+            },
+          ],
+        },
+        {
+          name: 'Réparation',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+          tasks: [
+            {
+              name: 'Crevaison',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+              price: 0,
+              minPrice: 50,
+              time: {
+                days: 0,
+                hours: 2,
+                minutes: 30,
+              },
+            },
+          ],
+        },
+      ],
+    },
+    {
+      slug: 'car-parts',
+      title: 'Pièces détachées',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+      activities: [
+        {
+          name: 'Moteur',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+          tasks: [],
+        },
+        {
+          name: 'Freinage',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+          tasks: [],
+        },
+      ],
+    },
+    {
+      slug: 'parallelism',
+      title: 'Parallèlisme',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+      activities: [
+        {
+          name: 'Avant',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+          tasks: [],
+        },
+        {
+          name: 'Arrière',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
+          tasks: [],
+        },
+      ],
+    },
+  ],
 };
 
 export default data;

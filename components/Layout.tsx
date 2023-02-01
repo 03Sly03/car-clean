@@ -12,7 +12,7 @@ const navigation = [
   { name: 'Accueil', href: '/', current: false },
   { name: 'Contact', href: '/contact', current: false },
   { name: "Véhicules d'occasion", href: '/usedVehicles', current: false },
-  { name: 'Maintenance', href: '/repair', current: false },
+  { name: 'Maintenance', href: '/maintenance', current: false },
 ];
 
 function classNames<T>(...classes: T[]) {
@@ -381,7 +381,7 @@ function Layout({ title, subtitle, children }: Props) {
           </nav> */}
         </header>
         <main className="container m-auto mt-4 px-4">{children}</main>
-        <footer className="flex h-20 justify-center items-center shadow-inner bg-[#2f2f47] text-white">
+        <footer className="flex h-28 justify-center items-center shadow-inner bg-[#2f2f47] text-white flex-col space-y-2 md:flex-row">
           <Link href="https://fr-fr.facebook.com" target="_blank">
             <Image
               src="/images/logos/fbSvg.svg"
@@ -391,7 +391,7 @@ function Layout({ title, subtitle, children }: Props) {
               className="h-11 w-11 hover:h-14 hover:w-14"
             ></Image>
           </Link>
-          <p className="text-sm">
+          <p className="text-xs md:text-sm text-center pb-3">
             Copyright © 2022 Car'Clean - WebSite made by{' '}
             <strong>SlyDevWeb</strong>
           </p>

@@ -18,3 +18,28 @@ export interface UserData {
   image: string;
   isAdmin: boolean;
 }
+
+export interface MaintenanceData {
+  slug: string;
+  title: string;
+  description: string;
+  activities: [
+    {
+      name: string;
+      description: string;
+      tasks: [
+        {
+          name: string;
+          description: string;
+          price: number;
+          minPrice: number;
+          time: {
+            days: number;
+            hours: number;
+            minutes: number;
+          };
+        }
+      ];
+    }
+  ];
+}
