@@ -9,6 +9,14 @@ const data = {
       isAdmin: true,
     },
   ],
+  promotion: {
+    name: 'PROMOTION',
+    serviceSlug: 'change-worn-parts',
+    serviceTitle: 'Entretient courrant',
+    serviceActivity: 'Vidange',
+    serviceName: 'Filtre à huile & huile',
+    reduction: 20,
+  },
   cars: [
     {
       slug: 'renaut-laguna',
@@ -216,7 +224,7 @@ const data = {
             {
               name: 'Filtre à huile & huile',
               description: 'Faut au moins changer tout ça',
-              price: 0,
+              price: 103,
               minPrice: 10,
               time: [
                 {
@@ -229,14 +237,14 @@ const data = {
           ],
         },
         {
-          name: 'Entretient complet',
+          name: 'Vidange complète',
           description:
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
           tasks: [
             {
               name: 'Filtre à huile & huile',
               description: 'ça fait parti du completitude...',
-              price: 0,
+              price: 78,
               minPrice: 10,
               time: {
                 days: 0,
@@ -247,7 +255,7 @@ const data = {
             {
               name: 'Filtre à air',
               description: 'Le filtre pour air du moteur hein',
-              price: 0,
+              price: 25,
               minPrice: 10,
               time: {
                 days: 0,
@@ -259,7 +267,7 @@ const data = {
               name: 'Filtre à carburant',
               description:
                 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
-              price: 0,
+              price: 30,
               minPrice: 10,
               time: {
                 days: 0,
@@ -278,7 +286,7 @@ const data = {
               name: 'Plaquettes avant',
               description:
                 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
-              price: 0,
+              price: 30,
               minPrice: 15,
               time: {
                 days: 0,
@@ -290,7 +298,7 @@ const data = {
               name: 'Plaquettes arrière',
               description:
                 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
-              price: 0,
+              price: 25,
               minPrice: 15,
               time: {
                 days: 0,
@@ -302,7 +310,7 @@ const data = {
               name: 'Purge',
               description:
                 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia ipsam voluptas ducimus velit minus? Dignissimos doloremque porro similique earum iusto.',
-              price: 0,
+              price: 40,
               minPrice: 40,
               time: {
                 days: 0,

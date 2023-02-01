@@ -1,21 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import Layout from '../components/Layout';
+import data from '../utils/data';
 
 export default function Home() {
   return (
     <Layout title="Accueil">
-      <div className="hover:scale-105 promo relative">
-        <img
-          src="/images/promos/pneus.jpg"
-          alt="pneus de voiture"
-          className="object-contain h-full w-full"
-        />
-        <div className="absolute bottom-0 right-5 bg-[#2f2f47da] text-[#ef7a37] font-extrabold tracking-widest p-8 w-56 rounded-br-[200px] rounded-tl-[200px] text-center">
-          <h2>Promotion</h2>
-          <p>-20 %</p>
+      <Link href={`/maintenance/${data.promotion.serviceSlug}`}>
+        <div className="hover:scale-105 promo relative overflow-hidden">
+          <img
+            src="/images/promos/pneus.jpg"
+            alt="pneus de voiture"
+            className="object-contain h-full w-full"
+          />
+          <div className="absolute bottom-0 left-0 bg-[#2f2f47da] text-[#ef7a37] font-extrabold tracking-widest px-8 sm:px-16 py-5 mr-10 rounded-br-[200px] rounded-tl-[200px] text-center text-sm md:text-base">
+            <h2>
+              {data.promotion.name} - {data.promotion.serviceTitle}
+            </h2>
+            <p className="text-xl">{data.promotion.serviceActivity}</p>
+            <p>{data.promotion.serviceName}</p>
+            <p>-{data.promotion.reduction} %</p>
+          </div>
         </div>
-      </div>
+      </Link>
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 mt-20 text-xl">
         <Link href="/usedVehicles">
           <div className="hover:scale-105 h-52 w-auto bg-[#ef7a3757] flex items-center justify-center shadow-lg shadow-gray-500 rounded-tl-[100px] rounded-br-[100px] m-5 relative">
@@ -29,7 +36,7 @@ export default function Home() {
             </h2>
           </div>
         </Link>
-        <Link href="/repair">
+        <Link href="/maintenance/change-worn-parts">
           <div className="hover:scale-105 h-52 w-auto bg-[#2f2f4757] flex items-center justify-center shadow-lg shadow-gray-500 rounded-tl-[100px] rounded-br-[100px] m-5 relative">
             <img
               src="/images/card-home/maintenance.jpg"
@@ -37,11 +44,11 @@ export default function Home() {
               className="object-cover h-full w-full rounded-tl-[100px] rounded-br-[100px] opacity-10"
             />
             <h2 className="font-bold text-center tracking-widest absolute">
-              Faire réparer sa voiture
+              Entretient courrant
             </h2>
           </div>
         </Link>
-        <Link href="/maintenance">
+        <Link href="/maintenance/air-conditioner">
           <div className="hover:scale-105 h-52 w-auto bg-[#ef7a3757] flex items-center justify-center shadow-lg shadow-gray-500 rounded-tl-[100px] rounded-br-[100px] m-5 relative">
             <img
               src="/images/card-home/clim.jpg"
@@ -53,7 +60,7 @@ export default function Home() {
             </h2>
           </div>
         </Link>
-        <Link href="/maintenance">
+        <Link href="/maintenance/tires">
           <div className="hover:scale-105 h-52 w-auto bg-[#2f2f4757] flex items-center justify-center shadow-lg shadow-gray-500 rounded-tl-[100px] rounded-br-[100px] m-5 relative">
             <img
               src="/images/card-home/tire.jpg"
@@ -65,7 +72,7 @@ export default function Home() {
             </h2>
           </div>
         </Link>
-        <Link href="/maintenance">
+        <Link href="/maintenance/car-parts">
           <div className="hover:scale-105 h-52 w-auto bg-[#ef7a3757] flex items-center justify-center shadow-lg shadow-gray-500 rounded-tl-[100px] rounded-br-[100px] m-5 relative">
             <img
               src="/images/card-home/carpart.jpg"
@@ -77,7 +84,7 @@ export default function Home() {
             </h2>
           </div>
         </Link>
-        <Link href="/maintenance">
+        <Link href="/maintenance/parallelism">
           <div className="hover:scale-105 h-52 w-auto bg-[#2f2f4757] flex items-center justify-center shadow-lg shadow-gray-500 rounded-tl-[100px] rounded-br-[100px] m-5 relative">
             <img
               src="/images/card-home/para.jpg"
