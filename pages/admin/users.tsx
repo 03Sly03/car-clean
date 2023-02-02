@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import React, { useEffect, useReducer } from 'react';
 import { toast } from 'react-toastify';
 import AdminSideMenu from '../../components/AdminSideMenu';
@@ -37,32 +37,30 @@ function reducer(state: any, action: any) {
 }
 
 function AdminUsersScreen() {
-  const router = useRouter();
+  // const router = useRouter();
 
-  const [
-    { loading, error, users, successDelete, loadingDelete, loadingCreate },
-    dispatch,
-  ] = useReducer(reducer, {
-    loading: true,
-    users: [],
-    error: '',
-  });
+  const [{ loading, error, users, successDelete, loadingDelete }, dispatch] =
+    useReducer(reducer, {
+      loading: true,
+      users: [],
+      error: '',
+    });
 
-  const createHandler = async () => {
-    if (!window.confirm('Are you sure?')) {
-      return;
-    }
-    try {
-      dispatch({ type: 'CREATE_REQUEST' });
-      const { data } = await axios.post(`/api/admin/users`);
-      dispatch({ type: 'CREATE_SUCCESS' });
-      toast.success('User created successfully');
-      router.push(`/admin/user/${data.user._id}`);
-    } catch (err) {
-      dispatch({ type: 'CREATE_FAIL' });
-      toast.error(getError(err));
-    }
-  };
+  // const createHandler = async () => {
+  //   if (!window.confirm('Are you sure?')) {
+  //     return;
+  //   }
+  //   try {
+  //     dispatch({ type: 'CREATE_REQUEST' });
+  //     const { data } = await axios.post(`/api/admin/users`);
+  //     dispatch({ type: 'CREATE_SUCCESS' });
+  //     toast.success('User created successfully');
+  //     router.push(`/admin/user/${data.user._id}`);
+  //   } catch (err) {
+  //     dispatch({ type: 'CREATE_FAIL' });
+  //     toast.error(getError(err));
+  //   }
+  // };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -104,13 +102,16 @@ function AdminUsersScreen() {
           <div className="flex justify-between">
             <h1 className="mb-4 text-xl">Utilisateurs</h1>
             {loadingDelete && <div>Deleting...</div>}
-            <button
+            {/* <button
               disabled={loadingCreate}
               onClick={createHandler}
               className="primary-button"
             >
               {loadingCreate ? 'Loading' : 'Ajouter un Utilisateurs'}
-            </button>
+            </button> */}
+            <Link href="/admin/user/register" className="primary-button">
+              Ajouter un utilisateur
+            </Link>
           </div>
           {loading ? (
             <div>Loading...</div>

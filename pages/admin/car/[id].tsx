@@ -63,7 +63,7 @@ export default function AdminCarEditScreen() {
         dispatch({ type: 'FETCH_SUCCESS' });
         setValue('category', data.category);
         setValue('slug', data.slug);
-        setValue('image', data.image);
+        setValue('images', data.images);
         setValue('brand', data.brand);
         setValue('model', data.model);
         setValue('year', data.year);
@@ -108,7 +108,7 @@ export default function AdminCarEditScreen() {
   const submitHandler: SubmitHandler<CarData> = async ({
     category,
     slug,
-    image,
+    images,
     brand,
     model,
     year,
@@ -121,7 +121,7 @@ export default function AdminCarEditScreen() {
       await axios.put(`/api/admin/cars/${carId}`, {
         category,
         slug,
-        image,
+        images,
         brand,
         model,
         year,
@@ -201,12 +201,12 @@ export default function AdminCarEditScreen() {
                   type="text"
                   className="w-full"
                   id="image"
-                  {...register('image', {
+                  {...register('images', {
                     required: 'Please enter image',
                   })}
                 />
-                {errors.image && (
-                  <div className="text-red-500">{errors.image.message}</div>
+                {errors.images && (
+                  <div className="text-red-500">{errors.images.message}</div>
                 )}
               </div>
               <div className="mb-4">
