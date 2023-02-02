@@ -8,6 +8,17 @@ import Layout from '../../components/Layout';
 import Car from '../../models/Car';
 import db from '../../utils/db';
 
+const translateToGoodPhrase: { [key: string]: string } = {
+  energy: 'Energie',
+  motorisation: 'Motorisation',
+  gearbox: 'Boîte à vitesse',
+  guarantee: 'Garantie',
+  taxHorsePower: 'Puissance Fiscale',
+  dinHorses: 'Puissance (DIN)',
+  numberOfDoors: 'Nombre de portes',
+  numberOfPlaces: 'Nombre de places',
+};
+
 function CarScreen(props: any) {
   const { car } = props;
   if (!car) {
@@ -46,12 +57,16 @@ function CarScreen(props: any) {
               <h2 className="font-bold my-5">Description:</h2>
               <p className="text-justify">{car.description}</p>
               <h2 className="font-bold my-5">Caractèristiques:</h2>
-              {Object.keys(car.features).map((feature, index) => (
-                <p key={index} className="flex justify-between border-b mb-3">
-                  <span className="font-semibold">{feature}:</span>{' '}
-                  {car.features[feature]}
-                </p>
-              ))}
+              {Object.keys(car.features).map((feature, index) =>
+                translateToGoodPhrase[feature] ? (
+                  <p key={index} className="flex justify-between border-b mb-3">
+                    <span className="font-semibold">
+                      {translateToGoodPhrase[feature]} :
+                    </span>{' '}
+                    {car.features[feature]}
+                  </p>
+                ) : null
+              )}
             </div>
             {/* <p className="flex justify-between border-b mb-3">
                 <span className="font-semibold">Motorisation:</span> 2.2L TDCI
@@ -65,7 +80,7 @@ function CarScreen(props: any) {
             </div> */}
           </div>
           <div className="grid md:grid-cols-2 relative">
-            <div className="card p-5 w-full md:w-[50%] md:absolute lg:static lg:w-full left-0 bottom-10">
+            <div className="card p-5 w-full md:w-[50%] md:absolute lg:static lg:w-full left-0 bottom-[-40px]">
               <div className="mb-5 flex justify-center space-x-10 font-bold tracking-widest">
                 <div>Prix</div>
                 <div>{car.price}€</div>
@@ -88,7 +103,6 @@ export default CarScreen;
 export async function getServerSideProps(context: any) {
   const { params } = context;
   const { slug } = params;
-  console.log('le slug: ', slug);
 
   await db.connect();
   const car = await Car.findOne({ slug }).lean();

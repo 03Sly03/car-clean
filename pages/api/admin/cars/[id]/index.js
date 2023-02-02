@@ -31,13 +31,14 @@ const putHandler = async (req, res) => {
   if (car) {
     car.slug = req.body.slug;
     car.category = req.body.category;
-    car.image = req.body.image;
+    car.images = req.body.images;
     car.brand = req.body.brand;
     car.model = req.body.model;
     car.year = req.body.year;
     car.mileage = req.body.mileage;
     car.description = req.body.description;
     car.price = req.body.price;
+    car.features = req.body.features;
     await car.save();
     await db.disconnect();
     res.send({ message: 'Car updated successfully' });

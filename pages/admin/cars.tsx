@@ -142,7 +142,7 @@ export default function AdminCarsScreen() {
                       <tr key={car._id} className="border-b">
                         <td className=" p-5 flex items-center w-36">
                           <img
-                            src={car.image}
+                            src={car.images[0]}
                             alt={`${car.brand} ${car.model}`}
                             className="rounded-full w-full"
                           />
