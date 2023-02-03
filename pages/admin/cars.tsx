@@ -117,6 +117,75 @@ export default function AdminCarsScreen() {
             <div className="alert-error">{error}</div>
           ) : (
             <div className="overflow-x-auto">
+              {/* TEST NEW TABLE  */}
+
+              {/* <div className="table w-full ...">
+                <div className="table-header-group ...">
+                  <div className="table-row">
+                    <div className="table-cell text-left ..."></div>
+                    <div className="table-cell text-left ...">CATEGORY</div>
+                    <div className="table-cell text-left ...">ID</div>
+                    <div className="table-cell text-left ...">MARQUE</div>
+                    <div className="table-cell text-left ...">MODEL</div>
+                    <div className="table-cell text-left ...">ANNEE</div>
+                    <div className="table-cell text-left ...">KILOMETRAGE</div>
+                    <div className="table-cell text-left ...">PRIX</div>
+                    <div className="table-cell text-left ...">ACTIONS</div>
+                  </div>
+                </div>
+                <div className="table-row-group">
+                  {cars
+                    .sort(function compare(a: any, b: any) {
+                      if (a.cratedAt > b.createdAt) return -1;
+                      if (a.createdAt < b.createdAt) return 1;
+                      return 0;
+                    })
+                    .map((car: any) => (
+                      <div key={car._id} className="table-row">
+                        <div className="table-cell ...">
+                          <img
+                            src={car.images[0]}
+                            alt={`${car.brand} ${car.model}`}
+                            className="rounded-full w-full"
+                          />
+                        </div>
+                        <div className="table-cell ...">{car.category}</div>
+                        <div className="table-cell ...">
+                          {car._id.substring(20, 24)}
+                        </div>
+                        <div className="table-cell ...">{car.brand}</div>
+                        <div className="table-cell ...">{car.model}</div>
+                        <div className="table-cell ...">{car.year}</div>
+                        <div className="table-cell ...">{car.mileage}</div>
+                        <div className="table-cell ...">
+                          <div className="bg-[#2f2f47] rounded-full p-3 text-center text-white w-24">
+                            {car.price} €
+                          </div>
+                        </div>
+                        <div className="table-cell ...">
+                          <Link
+                            href={`/admin/car/${car._id}`}
+                            type="button"
+                            className="default-button mr-5 text-blue-500 hover:text-blue-700 active:text-blue-900"
+                          >
+                            Modifier
+                          </Link>
+                          &nbsp;
+                          <button
+                            onClick={() => deleteHandler(car._id)}
+                            className="default-button text-blue-500 hover:text-blue-700 active:text-blue-900"
+                            type="button"
+                          >
+                            Supprimer
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </div> */}
+
+              {/* END TEST NEW TABLE */}
+
               <table className="min-w-full">
                 <thead className="border-b">
                   <tr>

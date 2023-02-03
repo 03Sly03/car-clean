@@ -21,9 +21,15 @@ export default function UsedVehicles({ cars }: Props) {
           Retour
         </Link> */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 mt-10">
-          {cars.map((car) => (
-            <CarItem car={car} key={car.slug} />
-          ))}
+          {cars
+            .sort(function compare(a: any, b: any) {
+              if (a.brand < b.brand) return -1;
+              if (a.brand > b.brand) return 1;
+              return 0;
+            })
+            .map((car) => (
+              <CarItem car={car} key={car.slug} />
+            ))}
         </div>
       </div>
     </Layout>

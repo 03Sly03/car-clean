@@ -20,24 +20,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   await db.connect();
   const newCar = new Car({
-    slug: 'sample-name-' + Math.random(),
-    category: 'sample category',
+    slug: 'car - ' + Math.random(),
+    category: 'Aucune',
     images: ['/images/cars/car.webp'],
-    brand: 'sample brand',
-    model: 'sample model',
+    brand: 'N/C',
+    model: 'N/C',
     year: 2000,
     mileage: 0,
-    description: 'sample description',
+    description: 'N/C',
     price: 0,
     features: {
-      energy: 'Gasoil',
-      motorisation: '1,5L DCI',
-      gearbox: 'Manuelle',
-      guarantee: '6 mois',
-      taxHorsePower: 6,
-      dinHorses: 110,
-      numberOfDoors: 5,
-      numberOfPlaces: 5,
+      energy: 'N/C',
+      motorisation: 'N/C',
+      gearbox: 'N/C',
+      guarantee: 'N/C',
+      taxHorsePower: null,
+      dinHorses: null,
+      numberOfDoors: null,
+      numberOfPlaces: null,
     },
   });
 
