@@ -5,6 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { getError } from '../../../utils/error';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 type FormValues = {
   name: string;
@@ -16,7 +17,7 @@ type FormValues = {
 function RegisterScreen() {
   // const { data: session } = useSession();
 
-  // const router = useRouter();
+  const router = useRouter();
   // const { redirect }: any = router.query;
 
   // useEffect(() => {
@@ -54,6 +55,7 @@ function RegisterScreen() {
       //   toast.error(result?.error);
       // }
       reset();
+      router.push('/admin/users');
     } catch (err) {
       toast.error(getError(err));
     }
