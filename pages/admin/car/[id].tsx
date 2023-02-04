@@ -229,7 +229,7 @@ export default function AdminCarEditScreen() {
           Retour sans enregistrer
         </Link>
       </div>
-      <div className="grid grid-cols-1">
+      <div className="grid grid-cols-1 mb-20">
         {/* <div>
           <ul>
           <li>
@@ -306,7 +306,7 @@ export default function AdminCarEditScreen() {
             <div className="mb-5">
               <Listbox value={selected} onChange={setSelected}>
                 <Listbox.Label>Categorie</Listbox.Label>
-                <div className="relative mt-1 grid grid-cols-4">
+                <div className="relative mt-1 grid sm:grid-cols-4">
                   <Listbox.Button
                     className={`relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left border focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm ${
                       errors.category &&
@@ -319,6 +319,7 @@ export default function AdminCarEditScreen() {
                         ? ''
                         : selected.name
                     }
+                    autoFocus
                     {...register('category', {
                       required: 'Veuillez selectionner une catégorie',
                     })}
@@ -459,7 +460,6 @@ export default function AdminCarEditScreen() {
                 type="text"
                 className="w-full"
                 id="model"
-                autoFocus
                 {...register('model', {
                   required: 'Please enter model',
                 })}

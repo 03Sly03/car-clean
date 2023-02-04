@@ -140,22 +140,15 @@ export default function AdminPromotionEditScreen() {
 
   return (
     <Layout title={`Edit Promotion ${promotionId}`}>
-      <div className="grid md:grid-cols-4 md:gap-5">
-        <div>
-          <ul>
-            <li>
-              <Link href="/admin/dashboard">Tableau de bord</Link>
-            </li>
-            <li>
-              <Link href="/admin/promotions" className="font-bold">
-                Promotions
-              </Link>
-            </li>
-            <li>
-              <Link href="/admin/users">Utilisateurs</Link>
-            </li>
-          </ul>
-        </div>
+      <div className="mb-10">
+        <Link
+          href="/admin/promotions"
+          className="font-extrabold bg-[#2F2F47] text-white p-3 rounded-xl"
+        >
+          Retour sans enregistrer
+        </Link>
+      </div>
+      <div className="grid mb-20">
         <div className="md:col-span-3">
           {loading ? (
             <div>Loading...</div>
@@ -168,11 +161,12 @@ export default function AdminPromotionEditScreen() {
             >
               <h1 className="mb-4 text-xl">{`Edit Promotion ${promotionId}`}</h1>
               <div className="mb-4">
-                <label htmlFor="name">Nom</label>
+                <label htmlFor="name">Nom de la promotion</label>
                 <input
                   type="text"
                   className="w-full"
                   id="name"
+                  autoFocus
                   {...register('name', {
                     required: 'Please enter category',
                   })}
@@ -238,12 +232,11 @@ export default function AdminPromotionEditScreen() {
                 )}
               </div>
               <div className="mb-4">
-                <label htmlFor="serviceActivity">Modèle</label>
+                <label htmlFor="serviceActivity">Activitée</label>
                 <input
                   type="text"
                   className="w-full"
                   id="serviceActivity"
-                  autoFocus
                   {...register('serviceActivity', {
                     required: 'Please enter serviceActivity',
                   })}
@@ -289,9 +282,6 @@ export default function AdminPromotionEditScreen() {
                 <button disabled={loadingUpdate} className="primary-button">
                   {loadingUpdate ? 'Loading' : 'Update'}
                 </button>
-              </div>
-              <div className="mb-4">
-                <Link href={`/admin/promotions`}>Back</Link>
               </div>
             </form>
           )}

@@ -134,7 +134,7 @@ export default function AdminPromotionsScreen() {
                 <thead className="border-b">
                   <tr>
                     {/* <th className="p-5 text-center"></th> */}
-                    <th className="p-5 text-left">ID</th>
+                    {/* <th className="p-5 text-left">ID</th> */}
                     <th className="p-5 text-left">NOM</th>
                     <th className="px-5 text-left">TITRE</th>
                     <th className="p-5 text-left">CATEGORIE</th>
@@ -158,9 +158,9 @@ export default function AdminPromotionsScreen() {
                             className="rounded-full w-full"
                           />
                         </td> */}
-                        <td className=" p-5 ">
+                        {/* <td className=" p-5 ">
                           {promotion._id.substring(20, 24)}
-                        </td>
+                        </td> */}
                         <td className=" p-5 ">{promotion.name}</td>
                         <td className=" p-5 ">{promotion.serviceTitle}</td>
                         <td className=" p-5 ">{promotion.serviceActivity}</td>

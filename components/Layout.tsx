@@ -283,8 +283,13 @@ function Layout({ title, subtitle, children }: Props) {
           </Disclosure>
         </header>
         <main className="container m-auto mt-4 px-4">{children}</main>
-        <footer className="flex h-28 justify-center items-center shadow-inner bg-[#2f2f47] text-white flex-col space-y-2 md:flex-row">
-          <Link href="https://fr-fr.facebook.com" target="_blank">
+        <footer className="flex justify-center bg-[#2f2f47] text-white py-16">
+          {/* className="flex h-28 justify-center items-center shadow-inner flex-col space-y-2 md:flex-row" */}
+          {/* <Link
+            href="https://fr-fr.facebook.com"
+            target="_blank"
+            className="flex justify-center items-center"
+          >
             <Image
               src="/images/logos/fbSvg.svg"
               alt="logo facebook"
@@ -292,11 +297,36 @@ function Layout({ title, subtitle, children }: Props) {
               height={60}
               className="h-11 w-11 hover:h-14 hover:w-14"
             ></Image>
-          </Link>
-          <p className="text-xs md:text-sm text-center pb-3">
-            Copyright © 2022 Car'Clean - WebSite made by{' '}
-            <strong>SlyDevWeb</strong>
-          </p>
+          </Link> */}
+
+          <div className="text-xs md:text-sm text-center">
+            <div className="flex items-center justify-center flex-col xs:flex-row xs:space-x-3">
+              <p>Copyright © 2022 Car'Clean</p>{' '}
+              <p className="hidden xs:block">/</p>{' '}
+              <p className="flex items-center">
+                Rejoignez-nous sur
+                <Link
+                  href="https://fr-fr.facebook.com"
+                  target="_blank"
+                  className="flex justify-center"
+                >
+                  <div className="rounded-full h-11 w-11 flex items-center justify-center relative">
+                    <Image
+                      src="/images/logos/fbSvg.svg"
+                      alt="logo facebook"
+                      width={60}
+                      height={60}
+                      className="h-11 w-11 hover:h-14 hover:w-14"
+                    />
+                  </div>
+                </Link>
+              </p>
+            </div>
+            <p>-</p>
+            <p className="mt-3">
+              WebSite made by <strong>SlyDevWeb</strong>
+            </p>
+          </div>
         </footer>
       </div>
     </>

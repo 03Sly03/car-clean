@@ -221,7 +221,7 @@ export default function AdminCarsScreen() {
                         <td className=" p-5 ">{car.brand}</td>
                         <td className=" p-5 ">{car.model}</td>
                         <td className=" p-5 ">{car.year}</td>
-                        <td className=" p-5 ">{car.mileage}</td>
+                        <td className=" p-5 ">{car.mileage} km</td>
                         <td className=" p-5">
                           <div className="bg-[#2f2f47] rounded-full p-3 text-center text-white w-24">
                             {car.price} €

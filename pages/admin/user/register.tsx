@@ -63,7 +63,7 @@ function RegisterScreen() {
   return (
     <Layout title="Créer un compte">
       <form
-        className="mx-auto max-w-screen-md"
+        className="mx-auto max-w-screen-md mb-20"
         onSubmit={handleSubmit(submitHandler)}
       >
         <h1 className="mb-4 text-xl">Créer un compte</h1>
@@ -141,7 +141,7 @@ function RegisterScreen() {
             )}
         </div>
 
-        <div className="mb-4 flex justify-between">
+        <div className="mb-4 flex justify-between space-x-3">
           <button className="primary-button">Enregistrer</button>
           <Link href="/admin/users" className="primary-button">
             Revenir au menu des utilisateurs

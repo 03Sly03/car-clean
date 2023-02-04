@@ -129,22 +129,15 @@ export default function AdminUserEditScreen() {
 
   return (
     <Layout title={`Edit User ${userId}`}>
-      <div className="grid md:grid-cols-4 md:gap-5">
-        <div>
-          <ul>
-            <li>
-              <Link href="/admin/dashboard">Tableau de bord</Link>
-            </li>
-            <li>
-              <Link href="/admin/users">Véhicules</Link>
-            </li>
-            <li>
-              <Link href="/admin/users" className="font-bold">
-                Utilisateurs
-              </Link>
-            </li>
-          </ul>
-        </div>
+      <div className="mb-10">
+        <Link
+          href="/admin/users"
+          className="font-extrabold bg-[#2F2F47] text-white p-3 rounded-xl"
+        >
+          Retour sans enregistrer
+        </Link>
+      </div>
+      <div className="grid mb-20">
         <div className="md:col-span-3">
           {loading ? (
             <div>Loading...</div>
@@ -241,16 +234,11 @@ export default function AdminUserEditScreen() {
 
               <div className="mb-4">
                 <button disabled={loadingUpdate} className="primary-button">
-                  {loadingUpdate ? 'Loading' : 'Update'}
+                  {loadingUpdate ? 'Chargement' : 'Enregistrer'}
                 </button>
               </div>
             </form>
           )}
-        </div>
-        <div className="mb-4">
-          <Link className="card w-28 text-center p-3" href={`/admin/users`}>
-            Back
-          </Link>
         </div>
       </div>
     </Layout>
