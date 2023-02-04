@@ -216,7 +216,7 @@ export default function AdminCarEditScreen() {
   }
 
   const [selected, setSelected] = useState(categories[0]);
-  console.log('le selected: ', selected.name);
+  // console.log('le selected: ', selected.name);
   // const [selectedCategory, setSelectedCategory] = useState('');
   // const [selectedPerson, setSelectedPerson] = useState(thingToSelect[0]);
   return (

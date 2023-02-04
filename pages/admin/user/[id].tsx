@@ -60,7 +60,7 @@ export default function AdminUserEditScreen() {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
         const { data } = await axios.get(`/api/admin/users/${userId}`);
-        console.log('le data fetch_request: ', data);
+        // console.log('le data fetch_request: ', data);
         dispatch({ type: 'FETCH_SUCCESS' });
         setValue('name', data.name);
         setValue('email', data.email);

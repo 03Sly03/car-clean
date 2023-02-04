@@ -195,7 +195,7 @@ function Layout({ title, subtitle, children }: Props) {
                                     </Link>
                                   )}
                                 </Menu.Item>
-                                <Menu.Item>
+                                {/* <Menu.Item>
                                   {({ active }) => (
                                     <Link
                                       href="/settings"
@@ -207,7 +207,7 @@ function Layout({ title, subtitle, children }: Props) {
                                       Paramètres
                                     </Link>
                                   )}
-                                </Menu.Item>
+                                </Menu.Item> */}
 
                                 <>
                                   {session.user.isAdmin && (

@@ -14,7 +14,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return res.status(401).send({ message: 'signin required' });
   }
   const { user } = session;
-  console.log('le user: ', user);
+  // console.log('le user: ', user);
   const {
     name,
     email,
@@ -32,7 +32,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     });
     return;
   }
-  console.log('le user: ', user._id);
+  // console.log('le user: ', user._id);
   await db.connect();
   const toUpdateUser = await User.findById(user._id);
   toUpdateUser.name = name;

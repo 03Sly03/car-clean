@@ -6,7 +6,7 @@ async function handler(req: any, res: any) {
     return;
   }
   const { name, email, contactMessage } = req.body;
-  console.log(name, email, contactMessage);
+  // console.log(name, email, contactMessage);
   if (!name || !email || !email.includes('@') || !contactMessage) {
     res.status(422).json({
       message: 'Validation error machin truc',
