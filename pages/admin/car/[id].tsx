@@ -141,6 +141,7 @@ export default function AdminCarEditScreen() {
         imagesArray.push(data.secure_url);
         // console.log('le concatImages: ', imagesArray);
         setMultipleImages(imagesArray);
+        setValue('images', imagesArray);
 
         // console.log(key, fileArray[key]);
       }
@@ -161,7 +162,8 @@ export default function AdminCarEditScreen() {
     }
   };
 
-  // console.log('le multipleImages après: ', multipleImages);
+  console.log('le multipleImages après: ', multipleImages);
+  console.log('le images après: ', getValues('images'));
 
   const submitHandler: SubmitHandler<CarData> = async ({
     category,
@@ -175,7 +177,12 @@ export default function AdminCarEditScreen() {
     price,
     features,
   }) => {
-    images = multipleImages;
+    if (images.length === 0) {
+      return;
+    }
+    if (category === 'Aucune' || category === '') {
+      return;
+    }
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(`/api/admin/cars/${carId}`, {
@@ -213,12 +220,16 @@ export default function AdminCarEditScreen() {
       (image: string) => image !== multipleImages[+indexCarId]
     );
     setMultipleImages(arrayafterDelete);
+    setValue('images', []);
   }
 
   const [selected, setSelected] = useState(categories[0]);
   // console.log('le selected: ', selected.name);
   // const [selectedCategory, setSelectedCategory] = useState('');
   // const [selectedPerson, setSelectedPerson] = useState(thingToSelect[0]);
+
+  console.log('la category: ', getValues('category'));
+
   return (
     <Layout title={`Edit Car ${carId}`}>
       <div className="mb-10">
@@ -395,7 +406,13 @@ export default function AdminCarEditScreen() {
                 <div className="text-red-500">{errors.slug.message}</div>
               )}
             </div>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 mt-10">
+            <div
+              className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 mt-10"
+              id="images"
+              {...register('images', {
+                required: 'Please enter images',
+              })}
+            >
               {multipleImages.map((image: string, index: number) => (
                 <div key={index} className="mb-4">
                   <img
@@ -414,20 +431,20 @@ export default function AdminCarEditScreen() {
                       Uploading....
                     </div>
                   )}
-                  {/* <label htmlFor="images">...</label> */}
-                  {/* <input
-                      type="text"
-                      className="w-full"
-                      id="images"
-                      {...register('images', {
-                        required: 'Please enter images',
-                      })}
-                    /> */}
-                  {errors.images && (
-                    <div className="text-red-500">{errors.images.message}</div>
-                  )}
+                  {/* <label htmlFor="images">...</label>
+                  <input
+                    type="text"
+                    className="w-full"
+                    id="images"
+                    {...register('images', {
+                      required: 'Please enter images',
+                    })}
+                  /> */}
                 </div>
               ))}
+              {errors.images && (
+                <div className="text-red-500">{errors.images.message}</div>
+              )}
             </div>
             <div className="mb-4">
               <label htmlFor="imagesFile">Upload images</label>

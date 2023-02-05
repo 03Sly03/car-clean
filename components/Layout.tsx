@@ -303,8 +303,8 @@ function Layout({ title, subtitle, children }: Props) {
             <div className="flex items-center justify-center flex-col xs:flex-row xs:space-x-3">
               <p>Copyright © 2022 Car'Clean</p>{' '}
               <p className="hidden xs:block">/</p>{' '}
-              <p className="flex items-center">
-                Rejoignez-nous sur
+              <div className="flex items-center">
+                <p>Rejoignez-nous sur</p>
                 <Link
                   href="https://fr-fr.facebook.com"
                   target="_blank"
@@ -320,7 +320,7 @@ function Layout({ title, subtitle, children }: Props) {
                     />
                   </div>
                 </Link>
-              </p>
+              </div>
             </div>
             <p>-</p>
             <p className="mt-3">
