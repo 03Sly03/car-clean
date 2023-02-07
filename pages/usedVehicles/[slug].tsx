@@ -63,7 +63,11 @@ function CarScreen(props: any) {
                     <span className="font-semibold">
                       {translateToGoodPhrase[feature]} :
                     </span>{' '}
-                    {car.features[feature]}
+                    {feature === 'taxHorsePower' || feature === 'dinHorses'
+                      ? feature === 'taxHorsePower'
+                        ? car.features[feature] + ' cv'
+                        : car.features[feature] + ' ch'
+                      : car.features[feature]}
                   </p>
                 ) : null
               )}

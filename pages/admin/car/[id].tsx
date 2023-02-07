@@ -96,10 +96,7 @@ export default function AdminCarEditScreen() {
     { name: 'Utilitaire', unavailable: false },
   ];
 
-  console.log('les category avanto: ', categories[0]);
   const [selected, setSelected] = useState(categories[0]);
-  console.log('la category: ', getValues('category'));
-  console.log('le selected: ', selected);
 
   const [multipleImages, setMultipleImages] = useState<any>([]);
   useEffect(() => {
@@ -139,30 +136,12 @@ export default function AdminCarEditScreen() {
 
   const router = useRouter();
 
-  // const images = getValues('images');
-  // console.log('les images: ', images);
-
-  // setMultipleImages(['ahahaha', 'bhbhbhbhbhbhbhb']);
-  // console.log(
-  //   "le multipleImages avant l'upload (récup des images déjà présentes): ",
-  //   multipleImages
-  // );
-
   const uploadHandler = async (e: any, imageField: any = 'images') => {
-    // if (e.target.files) {
-    //   const imageArray = Array.from(e.target.files).map((file: any) =>
-    //     URL.createObjectURL(file)
-    //   );
-    //   console.log('le url.create... dans le imageArray : ', imageArray);
-    //   setMultipleImages(imageArray);
-    //   console.log('le multipleImages: ', multipleImages);
-    // }
     let imagesArray: any = multipleImages;
     const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/upload`;
     try {
       dispatch({ type: 'UPLOAD_REQUEST' });
       const fileArray = e.target.files;
-      // console.log('le multipleImages: ', multipleImages);
       for (const key of Object.keys(fileArray)) {
         const {
           data: { signature, timestamp },
@@ -175,14 +154,10 @@ export default function AdminCarEditScreen() {
         formData.append('timestamp', timestamp);
         formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY!);
         const { data } = await axios.post(url, formData);
-        // console.log(data.secure_url);
         setValue(imageField, data.secure_url);
         imagesArray.push(data.secure_url);
-        // console.log('le concatImages: ', imagesArray);
         setMultipleImages(imagesArray);
         setValue('images', imagesArray);
-
-        // console.log(key, fileArray[key]);
       }
 
       // const file = e.target.files[0];
@@ -192,7 +167,6 @@ export default function AdminCarEditScreen() {
       // formData.append('timestamp', timestamp);
       // formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY!);
       // const { data } = await axios.post(url, formData);
-      // console.log('le data: ', data);
       dispatch({ type: 'UPLOAD_SUCCESS' });
       toast.success('File(s) uploaded successfully');
     } catch (err) {
@@ -200,9 +174,6 @@ export default function AdminCarEditScreen() {
       toast.error(getError(err));
     }
   };
-
-  console.log('le multipleImages après: ', multipleImages);
-  console.log('le images après: ', getValues('images'));
 
   const submitHandler: SubmitHandler<CarData> = async ({
     category,
@@ -521,6 +492,135 @@ export default function AdminCarEditScreen() {
                 <div className="text-red-500">{errors.model.message}</div>
               )}
             </div>
+
+            <div className="mb-4">
+              <label htmlFor="energy">Energie</label>
+              <input
+                onKeyPress={(event) => deleteEnterKeyAction(event)}
+                type="text"
+                className="w-full"
+                id="energy"
+                {...register('features.energy')}
+              />
+              {errors.features?.energy && (
+                <div className="text-red-500">
+                  {errors.features.energy.message}
+                </div>
+              )}
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="motorisation">Motorisation</label>
+              <input
+                onKeyPress={(event) => deleteEnterKeyAction(event)}
+                type="text"
+                className="w-full"
+                id="motorisation"
+                {...register('features.motorisation')}
+              />
+              {errors.features?.motorisation && (
+                <div className="text-red-500">
+                  {errors.features.motorisation.message}
+                </div>
+              )}
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="gearbox">Boîte à vitesse</label>
+              <input
+                onKeyPress={(event) => deleteEnterKeyAction(event)}
+                type="text"
+                className="w-full"
+                id="gearbox"
+                {...register('features.gearbox')}
+              />
+              {errors.features?.gearbox && (
+                <div className="text-red-500">
+                  {errors.features.gearbox.message}
+                </div>
+              )}
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="guarantee">Garantie</label>
+              <input
+                onKeyPress={(event) => deleteEnterKeyAction(event)}
+                type="text"
+                className="w-full"
+                id="guarantee"
+                {...register('features.guarantee')}
+              />
+              {errors.features?.guarantee && (
+                <div className="text-red-500">
+                  {errors.features.guarantee.message}
+                </div>
+              )}
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="taxHorsePower">Puissance fiscale</label>
+              <input
+                onKeyPress={(event) => deleteEnterKeyAction(event)}
+                type="text"
+                className="w-full"
+                id="taxHorsePower"
+                {...register('features.taxHorsePower')}
+              />
+              {errors.features?.taxHorsePower && (
+                <div className="text-red-500">
+                  {errors.features.taxHorsePower.message}
+                </div>
+              )}
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="dinHorses">Puissance (DIN)</label>
+              <input
+                onKeyPress={(event) => deleteEnterKeyAction(event)}
+                type="text"
+                className="w-full"
+                id="dinHorses"
+                {...register('features.dinHorses')}
+              />
+              {errors.features?.dinHorses && (
+                <div className="text-red-500">
+                  {errors.features.dinHorses.message}
+                </div>
+              )}
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="numberOfDoors">Nombre de portes</label>
+              <input
+                onKeyPress={(event) => deleteEnterKeyAction(event)}
+                type="text"
+                className="w-full"
+                id="numberOfDoors"
+                {...register('features.numberOfDoors')}
+              />
+              {errors.features?.numberOfDoors && (
+                <div className="text-red-500">
+                  {errors.features.numberOfDoors.message}
+                </div>
+              )}
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="numberOfPlaces">Nombre de places</label>
+              <input
+                onKeyPress={(event) => deleteEnterKeyAction(event)}
+                type="text"
+                className="w-full"
+                id="numberOfPlaces"
+                {...register('features.numberOfPlaces')}
+              />
+              {errors.features?.numberOfPlaces && (
+                <div className="text-red-500">
+                  {errors.features.numberOfPlaces.message}
+                </div>
+              )}
+            </div>
+
             <div className="grid grid-cols-2 gap-10">
               <div className="mb-4 flex flex-col">
                 <label htmlFor="year">Année</label>
