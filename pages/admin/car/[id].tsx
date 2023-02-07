@@ -22,6 +22,23 @@ import { getError } from '../../../utils/error';
 //   { id: 5, name: 'Kate', unavailable: false },
 // ];
 
+function deleteEnterKeyAction(event: any) {
+  // Compatibilité IE / Firefox
+  if (!event && window.event) {
+    event = window.event;
+  }
+  // IE
+  if (event.keyCode == 13) {
+    event.returnValue = false;
+    event.cancelBubble = true;
+  }
+  // DOM
+  if (event.which == 13) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+}
+
 function reducer(state: any, action: any) {
   switch (action.type) {
     case 'FETCH_REQUEST':
@@ -70,6 +87,20 @@ export default function AdminCarEditScreen() {
     getValues,
   } = useForm<CarData>();
 
+  const categories = [
+    { name: 'Aucune', unavailable: true },
+    { name: 'Berline', unavailable: false },
+    { name: 'Citadine', unavailable: false },
+    { name: 'Crossover', unavailable: false },
+    { name: 'Sportive', unavailable: false },
+    { name: 'Utilitaire', unavailable: false },
+  ];
+
+  console.log('les category avanto: ', categories[0]);
+  const [selected, setSelected] = useState(categories[0]);
+  console.log('la category: ', getValues('category'));
+  console.log('le selected: ', selected);
+
   const [multipleImages, setMultipleImages] = useState<any>([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -77,9 +108,12 @@ export default function AdminCarEditScreen() {
         dispatch({ type: 'FETCH_REQUEST' });
         const { data } = await axios.get(`/api/admin/cars/${carId}`);
         dispatch({ type: 'FETCH_SUCCESS' });
-        setValue('category', data.category);
+        setValue('category', data.category === 'Aucune' ? '' : data.category);
         setValue('slug', data.slug);
-        setValue('images', data.images);
+        setValue(
+          'images',
+          data.images[0] === '/images/cars/car.webp' ? [] : data.images
+        );
         setValue('brand', data.brand);
         setValue('model', data.model);
         setValue('year', data.year);
@@ -88,8 +122,13 @@ export default function AdminCarEditScreen() {
         setValue('price', data.price);
         setValue('features', data.features);
 
-        setMultipleImages(data.images);
-        setSelected({ name: getValues('category'), unavailable: true });
+        setMultipleImages(
+          data.images[0] === '/images/cars/car.webp' ? [] : data.images
+        );
+        setSelected({
+          name: getValues('category') === '' ? 'Aucune' : getValues('category'),
+          unavailable: true,
+        });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
       }
@@ -183,6 +222,17 @@ export default function AdminCarEditScreen() {
     if (category === 'Aucune' || category === '') {
       return;
     }
+    if (brand !== 'N/C' && model !== 'N/C') {
+      if (slug.substring(0, 3) === 'car') {
+        slug = slug.replace(
+          'car',
+          `${brand.split(' ').join('').toLowerCase()}-${model
+            .split(' ')
+            .join('')
+            .toLowerCase()}`
+        );
+      }
+    }
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(`/api/admin/cars/${carId}`, {
@@ -206,29 +256,14 @@ export default function AdminCarEditScreen() {
     }
   };
 
-  const categories = [
-    { name: 'Aucune', unavailable: true },
-    { name: 'Berline', unavailable: false },
-    { name: 'Utilitaire', unavailable: false },
-    { name: 'Citadine', unavailable: false },
-    { name: 'Crossover', unavailable: false },
-  ];
-
-  function handleDelete(e: any, indexCarId: any) {
+  const handleDelete = async (e: any, indexCarId: any) => {
     e.preventDefault();
     const arrayafterDelete = multipleImages.filter(
       (image: string) => image !== multipleImages[+indexCarId]
     );
     setMultipleImages(arrayafterDelete);
-    setValue('images', []);
-  }
-
-  const [selected, setSelected] = useState(categories[0]);
-  // console.log('le selected: ', selected.name);
-  // const [selectedCategory, setSelectedCategory] = useState('');
-  // const [selectedPerson, setSelectedPerson] = useState(thingToSelect[0]);
-
-  console.log('la category: ', getValues('category'));
+    setValue('images', arrayafterDelete);
+  };
 
   return (
     <Layout title={`Edit Car ${carId}`}>
@@ -324,12 +359,7 @@ export default function AdminCarEditScreen() {
                       'focus:border-red-500 focus:ring-red-500 border-red-500'
                     }`}
                     id="category"
-                    value={
-                      selected.name === 'sample category' ||
-                      selected.name === 'Aucune'
-                        ? ''
-                        : selected.name
-                    }
+                    value={selected.name === 'Aucune' ? '' : selected.name}
                     autoFocus
                     {...register('category', {
                       required: 'Veuillez selectionner une catégorie',
@@ -392,7 +422,7 @@ export default function AdminCarEditScreen() {
                 <div className="text-red-500">{errors.category.message}</div>
               )}
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label htmlFor="slug">Slug</label>
               <input
                 type="text"
@@ -405,12 +435,12 @@ export default function AdminCarEditScreen() {
               {errors.slug && (
                 <div className="text-red-500">{errors.slug.message}</div>
               )}
-            </div>
+            </div> */}
             <div
               className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 mt-10"
               id="images"
               {...register('images', {
-                required: 'Please enter images',
+                required: 'Selectionnez au moins une image',
               })}
             >
               {multipleImages.map((image: string, index: number) => (
@@ -421,6 +451,7 @@ export default function AdminCarEditScreen() {
                     alt={getValues('brand') + ' ' + getValues('model')}
                   />
                   <button
+                    type="button"
                     onClick={(e) => handleDelete(e, index)}
                     className="w-full p-2 border-2 border-white text-center text-white bg-red-600"
                   >
@@ -442,24 +473,28 @@ export default function AdminCarEditScreen() {
                   /> */}
                 </div>
               ))}
-              {errors.images && (
-                <div className="text-red-500">{errors.images.message}</div>
-              )}
             </div>
             <div className="mb-4">
               <label htmlFor="imagesFile">Upload images</label>
               <input
                 type="file"
-                className="w-full"
+                className={`w-full ${
+                  errors.category &&
+                  'focus:border-red-500 focus:ring-red-500 border-red-500'
+                }`}
                 id="imagesFile"
                 multiple
                 onChange={uploadHandler}
               />
+              {errors.images && (
+                <div className="text-red-500">{errors.images.message}</div>
+              )}
               {loadingUpload && <div>Uploading....</div>}
             </div>
             <div className="mb-4">
               <label htmlFor="brand">brand</label>
               <input
+                onKeyPress={(event) => deleteEnterKeyAction(event)}
                 type="text"
                 className="w-full"
                 id="brand"
@@ -474,6 +509,7 @@ export default function AdminCarEditScreen() {
             <div className="mb-4">
               <label htmlFor="model">Modèle</label>
               <input
+                onKeyPress={(event) => deleteEnterKeyAction(event)}
                 type="text"
                 className="w-full"
                 id="model"
@@ -489,6 +525,7 @@ export default function AdminCarEditScreen() {
               <div className="mb-4 flex flex-col">
                 <label htmlFor="year">Année</label>
                 <input
+                  onKeyPress={(event) => deleteEnterKeyAction(event)}
                   type="number"
                   className="text-lg"
                   id="year"
@@ -503,6 +540,7 @@ export default function AdminCarEditScreen() {
               <div className="mb-4">
                 <label htmlFor="mileage">Kilométrage</label>
                 <input
+                  onKeyPress={(event) => deleteEnterKeyAction(event)}
                   type="number"
                   className="w-full"
                   id="mileage"
@@ -534,6 +572,7 @@ export default function AdminCarEditScreen() {
                 <label htmlFor="price">Tarif</label>
 
                 <input
+                  onKeyPress={(event) => deleteEnterKeyAction(event)}
                   type="number"
                   className="w-full"
                   id="price"
@@ -547,7 +586,11 @@ export default function AdminCarEditScreen() {
               </div>
             </div>
             <div className="mb-4">
-              <button disabled={loadingUpdate} className="primary-button">
+              <button
+                type="submit"
+                disabled={loadingUpdate}
+                className="primary-button"
+              >
                 {loadingUpdate ? 'Loading' : 'Update'}
               </button>
             </div>

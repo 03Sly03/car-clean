@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 import Car from '../../../../models/Car';
@@ -20,7 +21,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 const postHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   await db.connect();
   const newCar = new Car({
-    slug: 'car - ' + Math.random(),
+    slug: 'car-' + randomUUID(),
     category: 'Aucune',
     images: ['/images/cars/car.webp'],
     brand: 'N/C',

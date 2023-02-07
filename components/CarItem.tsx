@@ -10,14 +10,16 @@ type Props = {
 function CarItem({ car }: Props) {
   return (
     <Link href={`/usedVehicles/${car.slug}`}>
-      <div className="card hover:scale-110">
-        <img
-          src={car.images[0]}
-          alt={`${car.brand} ${car.model}`}
-          className="rounded shadow"
-        />
+      <div className="card hover:scale-110 md:h-[100%]">
+        <div className="md:h-40 lg:h-52">
+          <img
+            src={car.images[0]}
+            alt={`${car.brand} ${car.model}`}
+            className="rounded shadow"
+          />
+        </div>
         <div className="flex flex-col items-center justify-center p-5">
-          <h2 className="text-lg">
+          <h2 className="text-lg text-center">
             {car.brand} {car.model}
           </h2>
           <p className="mb-2">{car.mileage} km</p>
