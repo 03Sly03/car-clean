@@ -625,6 +625,175 @@ const data = {
       ],
     },
   ],
+  carsFeaturesData: [
+    {
+      brand: 'Renault',
+      family: [
+        {
+          brand: 'Renault',
+          name: 'Clio',
+          models: [
+            {
+              model: 'Clio',
+              fullName: 'Clio II',
+              name: 'II',
+              type: [
+                {
+                  name: 'Diesel',
+                  motorisation: [
+                    '1.5 DCI 65cv',
+                    '1.5 DCI 80cv',
+                    '1.5 DCI 100cv',
+                    '1.5 DCI Hatchback 70cv',
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          brand: 'Renault',
+          name: 'Espace',
+          models: [
+            {
+              model: 'Espace',
+              fullName: 'Espace IV',
+              name: 'IV Phase 2',
+              type: [
+                {
+                  name: 'Essence',
+                  motorisation: [
+                    '2.0 i 16V Turbo 170cv',
+                    '2.0 i 16V Turbo 170cv Boîte automatique',
+                    '2.0 i 140cv',
+                    '2.5 i V6 240cv Boîte automatique',
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      brand: 'Opel',
+      family: [
+        {
+          brand: 'Opel',
+          name: 'Astra',
+          models: [
+            {
+              model: 'Astra',
+              name: 'F Cabriolet',
+              type: [
+                {
+                  name: 'Essence',
+                  motorisation: [
+                    '1.4 i 16V 90cv',
+                    '1.4 i 16V 90cv Boîte automatique',
+                    '2.0 i 115cv',
+                    '2.0 i 115cv Boîte automatique',
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          brand: 'Opel',
+          name: 'Corsa',
+          models: [
+            {
+              model: 'Corsa',
+              name: 'A Hatchback',
+              type: [
+                {
+                  name: 'Diesel',
+                  motorisation: ['1.5 D 50cv', '1.5 TD 65cv'],
+                },
+                {
+                  name: 'Essence',
+                  motorisation: ['1.0 45cv', '1.2 45cv'],
+                },
+                {
+                  name: 'GPL',
+                  motorisation: ['1.0 45cv', '1.2 45cv'],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  carsBrand: [
+    {
+      name: 'Renault',
+    },
+    {
+      name: 'Opel',
+    },
+    {
+      name: 'Peugeot',
+    },
+    {
+      name: 'Citroen',
+    },
+    {
+      name: 'Fiat',
+    },
+    {
+      name: 'Toyota',
+    },
+  ],
+  carsModel: [
+    {
+      name: 'Clio',
+    },
+    {
+      name: 'Clio 2',
+    },
+    {
+      name: 'Clio 3',
+    },
+    {
+      name: 'Clio 4',
+    },
+    {
+      name: 'Espace 1',
+    },
+    {
+      name: 'Espace 2',
+    },
+    {
+      name: 'Espace 3',
+    },
+    {
+      name: 'Espace 4',
+    },
+    {
+      name: 'C4 Picasso',
+    },
+    {
+      name: 'C4',
+    },
+    {
+      name: 'Xsara',
+    },
+    {
+      name: 'Astra H',
+    },
+    {
+      name: 'Corsa',
+    },
+    {
+      name: 'Agila',
+    },
+    {
+      name: 'Meriva',
+    },
+  ],
+  type: ['Diesel', 'Essence', 'GPL'],
 };
 
 export default data;

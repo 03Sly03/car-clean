@@ -130,19 +130,28 @@ export default function AdminPromotionsScreen() {
             <div className="alert-error">{error}</div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="min-w-full">
-                <thead className="border-b">
-                  <tr>
+              <div className="min-w-full mt-10">
+                <div className="table-header-group">
+                  <div className="table-row font-bold">
                     {/* <th className="p-5 text-center"></th> */}
                     {/* <th className="p-5 text-left">ID</th> */}
-                    <th className="p-5 text-left">NOM</th>
-                    <th className="px-5 text-left">TITRE</th>
-                    <th className="p-5 text-left">CATEGORIE</th>
-                    <th className="p-5 text-left">SERVICE</th>
-                    <th className="p-5 text-left">REDUCTION</th>
-                  </tr>
-                </thead>
-                <tbody>
+                    <div className="hidden lg:table-cell p-5 text-left">
+                      NOM
+                    </div>
+                    <div className="hidden lg:table-cell p-5 text-left">
+                      TITRE
+                    </div>
+                    <div className="hidden sm:table-cell p-5 text-left">
+                      CATEGORIE
+                    </div>
+                    <div className="table-cell p-5 text-left">SERVICE</div>
+                    <div className="hidden xs:table-cell p-5 text-left">
+                      REDUCTION
+                    </div>
+                    <div className="table-cell p-5 text-left">ACTION</div>
+                  </div>
+                </div>
+                <div className="table-row-group">
                   {promotions
                     .sort(function compare(a: any, b: any) {
                       if (a.cratedAt > b.createdAt) return -1;
@@ -150,7 +159,7 @@ export default function AdminPromotionsScreen() {
                       return 0;
                     })
                     .map((promotion: any) => (
-                      <tr key={promotion._id} className="border-b">
+                      <div key={promotion._id} className="table-row">
                         {/* <td className=" p-5 flex items-center w-36">
                           <img
                             src={promotion.image}
@@ -161,16 +170,25 @@ export default function AdminPromotionsScreen() {
                         {/* <td className=" p-5 ">
                           {promotion._id.substring(20, 24)}
                         </td> */}
-                        <td className=" p-5 ">{promotion.name}</td>
-                        <td className=" p-5 ">{promotion.serviceTitle}</td>
-                        <td className=" p-5 ">{promotion.serviceActivity}</td>
-                        <td className=" p-5 ">{promotion.serviceName}</td>
-                        <td className=" p-5">
+                        <div className="hidden lg:table-cell p-5 ">
+                          {promotion.name}
+                        </div>
+                        <div className="hidden lg:table-cell p-5 ">
+                          {promotion.serviceTitle}
+                        </div>
+                        <div className="hidden sm:table-cell p-5 ">
+                          {promotion.serviceActivity}
+                        </div>
+                        <div className="table-cell p-5">
+                          <p>{promotion.serviceName}</p>
+                          <p className="xs:hidden">- {promotion.reduction} %</p>
+                        </div>
+                        <div className="hidden xs:table-cell p-5">
                           <div className="bg-[#2f2f47] rounded-full p-3 text-center text-white w-24">
                             {promotion.reduction} %
                           </div>
-                        </td>
-                        <td className=" p-5 ">
+                        </div>
+                        <div className="table-cell p-5 ">
                           <Link
                             href={`/admin/promotion/${promotion._id}`}
                             type="button"
@@ -186,11 +204,11 @@ export default function AdminPromotionsScreen() {
                           >
                             Supprimer
                           </button> */}
-                        </td>
-                      </tr>
+                        </div>
+                      </div>
                     ))}
-                </tbody>
-              </table>
+                </div>
+              </div>
             </div>
           )}
         </div>

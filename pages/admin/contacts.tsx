@@ -80,9 +80,9 @@ function AdminContactsScreen() {
     <Layout title="Contacts">
       <div className="grid md:grid-cols-4 md:gap-5 mb-20">
         <AdminSideMenu title="Contacts" />
-        <div className="overflow-x-auto md:col-span-3">
+        <div className="overflow-x-auto md:col-span-4 md:ml-52">
           <div className="flex justify-between">
-            <h1 className="mb-4 text-xl">Utilisateurs</h1>
+            <h1 className="mb-4 text-3xl font-bold">Contacts</h1>
             {loadingDelete && <div>Deleting...</div>}
           </div>
           {loading ? (
@@ -91,70 +91,82 @@ function AdminContactsScreen() {
             <div className="alert-error">{error}</div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="min-w-full">
-                <thead className="border-b">
-                  <tr>
-                    <th className="px-5 text-left">ID</th>
-                    <th className="p-5 text-left">NOM</th>
-                    <th className="p-5 text-left">INSCRIS</th>
-                    <th className="p-5 text-left">EMAIL</th>
-                    <th className="p-5 text-left">MESSAGE</th>
-                    <th className="p-5 text-left">ACTIONS</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {contacts
-                    .sort(function compare(a: any, b: any) {
-                      if (a.cratedAt > b.createdAt) return -1;
-                      if (a.createdAt < b.createdAt) return 1;
-                      return 0;
-                    })
-                    .map((contact: any) => (
-                      <tr
-                        key={contact._id}
-                        className={`border-b ${
+              <h2 className="font-bold text-lg pb-5 my-10 border-b-2 border-black">
+                MESSAGES
+              </h2>
+              {contacts
+                .sort(function compare(a: any, b: any) {
+                  if (a.cratedAt > b.createdAt) return -1;
+                  if (a.createdAt < b.createdAt) return 1;
+                  return 0;
+                })
+                .map((contact: any) => (
+                  <div
+                    key={contact._id}
+                    className="border-b-2 border-black mb-10"
+                  >
+                    <div className="lg:flex justify-around mb-5">
+                      <div className="flex mb-2">
+                        <p className="mr-3">De la part de :</p>
+                        <div>
+                          <p className="font-semibold">{contact.name}</p>
+                          <p className="text-sm">
+                            ID: {contact._id.substring(20, 24)}
+                          </p>
+                        </div>
+                      </div>
+                      <div
+                        className={`flex mb-2 p-3 border ${
                           usersMail.find((email) => email === contact.email)
                             ? 'bg-green-100'
                             : ''
                         }`}
                       >
-                        <td className=" p-5 align-text-top">
-                          {contact._id.substring(20, 24)}
-                        </td>
-                        <td className=" p-5 align-text-top">{contact.name}</td>
-                        <td className=" p-5 align-text-top">
+                        <p className="mr-3">Status:</p>
+                        <div className="font-semibold">
                           <>
                             {usersMail.find((email) => email === contact.email)
-                              ? 'OUI'
-                              : 'NON'}
+                              ? 'inscris'
+                              : 'non inscris'}
                           </>
-                        </td>
-                        <td className=" p-5 align-text-top">{contact.email}</td>
-                        <td className=" p-5 align-text-top">
-                          {contact.contactMessage.map(
-                            (message: string, index: number) => (
-                              <div key={index} className="contactMessage">
-                                <p className="mb-2 border-b p-3 text-justify">
-                                  {index + 1} - {message}
-                                </p>
-                              </div>
-                            )
-                          )}
-                        </td>
-                        <td className=" p-5">
-                          &nbsp;
-                          <button
-                            type="button"
-                            className="default-button text-blue-500 hover:text-blue-700 active:text-blue-900"
-                            onClick={() => deleteHandler(contact._id)}
-                          >
-                            Supprimer
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
+                        </div>
+                      </div>
+                      <div className="flex mb-2">
+                        <p className="mr-3">Adresse mail:</p>
+                        <div className="font-semibold">
+                          <p>{contact.email}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex w-full justify-center items-center">
+                      <div className="border xs:w-[80%] p-5 xs:p-10">
+                        <h3 className="font-bold">Message(s)</h3>
+                        {contact.contactMessage.map(
+                          (message: string, index: number) => (
+                            <div key={index} className="contactMessage">
+                              <p className="mb-2 border-b p-3 text-justify">
+                                {index + 1} - {message}
+                              </p>
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </div>
+                    <div className=" p-3 my-5">
+                      &nbsp;
+                      <button
+                        type="button"
+                        className="primary-button"
+                        onClick={() => deleteHandler(contact._id)}
+                      >
+                        Supprimer le(s) message(s) contact de{' '}
+                        <span className="text-black text-lg font-semibold">
+                          "{contact.name}"
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                ))}
             </div>
           )}
         </div>

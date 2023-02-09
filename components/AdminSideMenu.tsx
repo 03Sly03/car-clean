@@ -24,7 +24,7 @@ function AdminSideMenu({ title }: Props) {
 
   return (
     <div className="mb-10">
-      <ul className="p-5 m-2 block shadow-lg h-auto w-50 space-y-5">
+      <ul className="p-5 flex flex-col shadow-lg text-center space-y-5 md:w-44 lg:w-48 md:text-left">
         {navigation.map((item) => (
           <li key={item.name}>
             <Link

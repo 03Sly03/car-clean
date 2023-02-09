@@ -37,30 +37,12 @@ function reducer(state: any, action: any) {
 }
 
 function AdminUsersScreen() {
-  // const router = useRouter();
-
   const [{ loading, error, users, successDelete, loadingDelete }, dispatch] =
     useReducer(reducer, {
       loading: true,
       users: [],
       error: '',
     });
-
-  // const createHandler = async () => {
-  //   if (!window.confirm('Are you sure?')) {
-  //     return;
-  //   }
-  //   try {
-  //     dispatch({ type: 'CREATE_REQUEST' });
-  //     const { data } = await axios.post(`/api/admin/users`);
-  //     dispatch({ type: 'CREATE_SUCCESS' });
-  //     toast.success('User created successfully');
-  //     router.push(`/admin/user/${data.user._id}`);
-  //   } catch (err) {
-  //     dispatch({ type: 'CREATE_FAIL' });
-  //     toast.error(getError(err));
-  //   }
-  // };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -102,13 +84,6 @@ function AdminUsersScreen() {
           <div className="flex justify-between">
             <h1 className="mb-4 text-xl">Utilisateurs</h1>
             {loadingDelete && <div>Deleting...</div>}
-            {/* <button
-              disabled={loadingCreate}
-              onClick={createHandler}
-              className="primary-button"
-            >
-              {loadingCreate ? 'Loading' : 'Ajouter un Utilisateurs'}
-            </button> */}
             <Link href="/admin/user/register" className="primary-button">
               Ajouter un utilisateur
             </Link>
@@ -119,17 +94,28 @@ function AdminUsersScreen() {
             <div className="alert-error">{error}</div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="min-w-full">
-                <thead className="border-b">
-                  <tr>
-                    <th className="px-5 text-left">ID</th>
-                    <th className="p-5 text-left">NOM</th>
-                    <th className="p-5 text-left">EMAIL</th>
-                    <th className="p-5 text-left">ADMIN</th>
-                    <th className="p-5 text-left">ACTIONS</th>
-                  </tr>
-                </thead>
-                <tbody>
+              <div className="table min-w-full mt-10">
+                <div className="table-header-group">
+                  <div className="table-row font-bold">
+                    <div className="hidden lg:table-cell px-5 text-left">
+                      ID
+                    </div>
+                    <div className="hidden sm:table-cell p-5 text-left">
+                      NOM
+                    </div>
+                    <div className="table-cell p-5 text-left sm:hidden">
+                      NOM & EMAIL
+                    </div>
+                    <div className="hidden sm:table-cell p-5 text-left">
+                      EMAIL
+                    </div>
+                    <div className="hidden xs:table-cell p-5 text-center">
+                      ADMIN
+                    </div>
+                    <div className="table-cell p-5 text-left">ACTIONS</div>
+                  </div>
+                </div>
+                <div className="table-row-group">
                   {users
                     .sort(function compare(a: any, b: any) {
                       if (a.cratedAt > b.createdAt) return -1;
@@ -137,12 +123,26 @@ function AdminUsersScreen() {
                       return 0;
                     })
                     .map((user: any) => (
-                      <tr key={user._id} className="border-b">
-                        <td className=" p-5 ">{user._id.substring(20, 24)}</td>
-                        <td className=" p-5 ">{user.name}</td>
-                        <td className=" p-5 ">{user.email}</td>
-                        <td className=" p-5 ">{user.isAdmin ? 'YES' : 'NO'}</td>
-                        <td className=" p-5 ">
+                      <div key={user._id} className="table-row">
+                        <div className="hidden lg:table-cell border-b p-5 ">
+                          {user._id.substring(20, 24)}
+                        </div>
+                        <div className="hidden sm:table-cell border-b p-5 ">
+                          {user.name}
+                        </div>
+                        <div className="table-cell border-b p-5 ">
+                          <p className="sm:hidden">{user.name}</p>
+                          <div className="w-28 xs:w-32 sm:w-full overflow-x-auto">
+                            {user.email}
+                          </div>
+                          <p className="text-xs mt-3 lg:hidden">
+                            ID: {user._id.substring(20, 24)}
+                          </p>
+                        </div>
+                        <div className="hidden xs:table-cell border-b p-5 text-center">
+                          {user.isAdmin ? 'YES' : 'NO'}
+                        </div>
+                        <div className="table-cell border-b p-5 ">
                           <Link
                             href={`/admin/user/${user._id}`}
                             passHref
@@ -159,11 +159,11 @@ function AdminUsersScreen() {
                           >
                             Supprimer
                           </button>
-                        </td>
-                      </tr>
+                        </div>
+                      </div>
                     ))}
-                </tbody>
-              </table>
+                </div>
+              </div>
             </div>
           )}
         </div>

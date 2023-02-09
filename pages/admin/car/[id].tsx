@@ -11,16 +11,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import Layout from '../../../components/Layout';
 import { CarData } from '../../../src/types/datas';
+import data from '../../../utils/data';
 import { getError } from '../../../utils/error';
-
-// const thingToSelect: any = [
-//   { id: 0, name: 'Select a person', unavailable: true },
-//   { id: 1, name: 'Duncan', unavailable: false },
-//   { id: 2, name: 'Kenth', unavailable: false },
-//   { id: 3, name: 'Therese', unavailable: false },
-//   { id: 4, name: 'Benedict', unavailable: true },
-//   { id: 5, name: 'Kate', unavailable: false },
-// ];
 
 function deleteEnterKeyAction(event: any) {
   // Compatibilité IE / Firefox
@@ -70,7 +62,22 @@ function reducer(state: any, action: any) {
       return state;
   }
 }
+
+// const carsData = axios.get(
+//   'https://api.api-ninjas.com/v1/cars?limit=50&make=renault',
+//   {
+//     headers: {
+//       'X-Api-Key': 'zBT5WFO6kTYI9r6MAGLAgA==yeu2azf4n66rCqgF',
+//     },
+//   }
+// );
+// console.log(
+//   'le carsData: ',
+//   carsData.then((res) => console.log(res.data))
+// );
+
 export default function AdminCarEditScreen() {
+  console.log('le data.carsFeaturesData: ', data.carsFeaturesData[0]);
   const { query } = useRouter();
   const carId = query.id;
   const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] =
@@ -87,7 +94,7 @@ export default function AdminCarEditScreen() {
     getValues,
   } = useForm<CarData>();
 
-  const categories = [
+  const categories: any = [
     { name: 'Aucune', unavailable: true },
     { name: 'Berline', unavailable: false },
     { name: 'Citadine', unavailable: false },
@@ -97,6 +104,24 @@ export default function AdminCarEditScreen() {
   ];
 
   const [selected, setSelected] = useState(categories[0]);
+
+  // const brands: any = [
+  //   { id: 0, name: 'Sélectionnez une marque', unavailable: true },
+  //   { id: 0, name: 'Renault' },
+  //   { id: 1, name: 'Opel' },
+  //   { id: 2, name: 'Citroen' },
+  //   { id: 3, name: 'Ford' },
+  //   { id: 4, name: 'Peugeot' },
+  //   { id: 5, name: 'Fiat' },
+  // ];
+
+  const [selectedBrand, setSelectedBrand] = useState<any>(
+    data.carsFeaturesData[0]
+  );
+
+  console.log('le selectedBrand: ', selectedBrand);
+  const [selectedFamily, setSelectedFamily] = useState(selectedBrand.family[0]);
+  const [selectedModel, setSelectedModel] = useState(selectedFamily.models[0]);
 
   const [multipleImages, setMultipleImages] = useState<any>([]);
   useEffect(() => {
@@ -125,6 +150,40 @@ export default function AdminCarEditScreen() {
         setSelected({
           name: getValues('category') === '' ? 'Aucune' : getValues('category'),
           unavailable: true,
+        });
+        setSelectedBrand({
+          brand:
+            getValues('brand') === 'N/C'
+              ? 'Sélectionnez une marque'
+              : getValues('brand'),
+          family: [
+            {
+              name: data.features.model,
+              models: [],
+            },
+          ],
+        });
+        console.log('la motorisation récupéré: ', data.features.motorisation);
+        setSelectedModel({
+          model: getValues('model').split(' ').splice(0, 1).join(' '),
+          name:
+            getValues('model') === 'N/C'
+              ? 'Sélectionnez un modèle'
+              : getValues('model').split(' ').slice(1).join(' '),
+          type: [
+            {
+              name: data.features.energy,
+              motorisation: [data.features.motorisation],
+            },
+          ],
+        });
+        setSelectedFamily({
+          brand: getValues('brand'),
+          name:
+            getValues('model') === 'N/C'
+              ? 'Sélectionnez une famille'
+              : getValues('model').split(' ').splice(0, 1).join(' '),
+          models: [],
         });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
@@ -235,6 +294,15 @@ export default function AdminCarEditScreen() {
     setMultipleImages(arrayafterDelete);
     setValue('images', arrayafterDelete);
   };
+
+  console.log('le selectedFamilly: ', selectedFamily);
+  console.log('le selectedModel: ', selectedModel);
+  console.log('le selecModel.type: ', selectedModel.type);
+  selectedModel.type
+    ? console.log(selectedModel.type[0].motorisation)
+    : console.log('ahaaaa');
+
+  console.log('features.energy: ', getValues('features.energy'));
 
   return (
     <Layout title={`Edit Car ${carId}`}>
@@ -350,8 +418,8 @@ export default function AdminCarEditScreen() {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                   >
-                    <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                      {categories.map((category, categoryIdx) => (
+                    <Listbox.Options className="z-10 absolute mt-1 max-h-64 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                      {categories.map((category: any, categoryIdx: number) => (
                         <Listbox.Option
                           disabled={category.unavailable}
                           key={categoryIdx}
@@ -374,7 +442,7 @@ export default function AdminCarEditScreen() {
                                 {category.name}
                               </span>
                               {selected ? (
-                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
+                                <span className="z-0 absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
                                   <CheckIcon
                                     className="h-5 w-5"
                                     aria-hidden="true"
@@ -393,6 +461,270 @@ export default function AdminCarEditScreen() {
                 <div className="text-red-500">{errors.category.message}</div>
               )}
             </div>
+
+            <div className="mb-5">
+              <Listbox value={selectedBrand} onChange={setSelectedBrand}>
+                <Listbox.Label>Marque</Listbox.Label>
+                <div className="relative mt-1 grid sm:grid-cols-4">
+                  <Listbox.Button
+                    className={`relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left border focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm ${
+                      errors.brand &&
+                      'focus:border-red-500 focus:ring-red-500 border-red-500'
+                    }`}
+                    id="brand"
+                    value={
+                      selectedBrand.brand === 'Sélectionnez une marque'
+                        ? ''
+                        : selectedBrand.brand
+                    }
+                    {...register('brand', {
+                      required: 'Veuillez selectionner une catégorie',
+                    })}
+                  >
+                    <span className="block truncate">
+                      {selectedBrand.brand}
+                    </span>
+                    <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                      <ChevronUpDownIcon
+                        className="h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </Listbox.Button>
+                  <Transition
+                    as={Fragment}
+                    leave="transition ease-in duration-100"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                  >
+                    <Listbox.Options className="z-10 absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                      {data.carsFeaturesData
+                        .sort(function compare(a: any, b: any) {
+                          if (a.brand < b.brand) return -1;
+                          if (a.brand > b.brand) return 1;
+                          return 0;
+                        })
+                        .map((car: any, carIdx: number) => (
+                          <Listbox.Option
+                            disabled={car.unavailable}
+                            key={carIdx}
+                            className={({ active }) =>
+                              `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                                active
+                                  ? 'bg-gray-100 text-amber-900'
+                                  : 'text-gray-500'
+                              }`
+                            }
+                            value={car}
+                          >
+                            {({ selected }) => (
+                              <>
+                                <span
+                                  className={`block truncate ${
+                                    selected ? 'font-medium' : 'font-normal'
+                                  }`}
+                                >
+                                  {car.brand}
+                                </span>
+                                {selected ? (
+                                  <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
+                                    <CheckIcon
+                                      className="h-5 w-5"
+                                      aria-hidden="true"
+                                    />
+                                  </span>
+                                ) : null}
+                              </>
+                            )}
+                          </Listbox.Option>
+                        ))}
+                    </Listbox.Options>
+                  </Transition>
+                </div>
+              </Listbox>
+              {errors.brand && (
+                <div className="text-red-500">{errors.brand.message}</div>
+              )}
+            </div>
+
+            {selectedBrand.brand !== 'Sélectionnez une marque' ? (
+              <div className="mb-5">
+                <Listbox value={selectedFamily} onChange={setSelectedFamily}>
+                  <Listbox.Label>Famille</Listbox.Label>
+                  <div className="relative mt-1 grid sm:grid-cols-4">
+                    <Listbox.Button
+                      className={`relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left border focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm ${
+                        errors.model &&
+                        'focus:border-red-500 focus:ring-red-500 border-red-500'
+                      }`}
+                      id="brand"
+                      value={
+                        selectedFamily.name === 'Sélectionnez une famille'
+                          ? ''
+                          : selectedFamily.name
+                      }
+                    >
+                      <span className="block truncate">
+                        {selectedBrand.brand === 'Sélectionnez une marque' ||
+                        selectedBrand.brand !== selectedFamily.brand
+                          ? 'Sélectionnez une famille'
+                          : selectedFamily.name}
+                      </span>
+                      <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                        <ChevronUpDownIcon
+                          className="h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                      </span>
+                    </Listbox.Button>
+                    <Transition
+                      as={Fragment}
+                      leave="transition ease-in duration-100"
+                      leaveFrom="opacity-100"
+                      leaveTo="opacity-0"
+                    >
+                      <Listbox.Options className="z-10 absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                        {selectedBrand.family
+                          .sort(function compare(a: any, b: any) {
+                            if (a.name < b.name) return -1;
+                            if (a.name > b.name) return 1;
+                            return 0;
+                          })
+                          .map((family: any, familyIdx: number) => (
+                            <Listbox.Option
+                              disabled={family.unavailable}
+                              key={familyIdx}
+                              className={({ active }) =>
+                                `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                                  active
+                                    ? 'bg-gray-100 text-amber-900'
+                                    : 'text-gray-500'
+                                }`
+                              }
+                              value={family}
+                            >
+                              {({ selected }) => (
+                                <>
+                                  <span
+                                    className={`block truncate ${
+                                      selected ? 'font-medium' : 'font-normal'
+                                    }`}
+                                  >
+                                    {family.name}
+                                  </span>
+                                  {selected ? (
+                                    <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
+                                      <CheckIcon
+                                        className="h-5 w-5"
+                                        aria-hidden="true"
+                                      />
+                                    </span>
+                                  ) : null}
+                                </>
+                              )}
+                            </Listbox.Option>
+                          ))}
+                      </Listbox.Options>
+                    </Transition>
+                  </div>
+                </Listbox>
+              </div>
+            ) : (
+              <div>Sélectionnez une marque avant (disabled)</div>
+            )}
+            {selectedBrand.brand !== 'Sélectionnez une marque' &&
+            selectedFamily !== 'Sélectionnez une famille' ? (
+              <div className="mb-5">
+                <Listbox value={selectedModel} onChange={setSelectedModel}>
+                  <Listbox.Label>Modèle</Listbox.Label>
+                  <div className="relative mt-1 grid sm:grid-cols-4">
+                    <Listbox.Button
+                      className={`relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left border focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm ${
+                        errors.model &&
+                        'focus:border-red-500 focus:ring-red-500 border-red-500'
+                      }`}
+                      id="brand"
+                      value={
+                        selectedModel.name === 'Sélectionnez un modèle'
+                          ? ''
+                          : `${selectedFamily.name} ${selectedModel.name}`
+                      }
+                      {...register('model', {
+                        required: 'Veuillez selectionner un modèle',
+                      })}
+                    >
+                      <span className="block truncate">
+                        {selectedFamily.name === 'Sélectionnez une marque' ||
+                        selectedFamily.name !== selectedModel.model
+                          ? 'Sélectionnez un modèle'
+                          : selectedModel.name}
+                      </span>
+                      <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                        <ChevronUpDownIcon
+                          className="h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                      </span>
+                    </Listbox.Button>
+                    <Transition
+                      as={Fragment}
+                      leave="transition ease-in duration-100"
+                      leaveFrom="opacity-100"
+                      leaveTo="opacity-0"
+                    >
+                      <Listbox.Options className="z-10 absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                        {selectedFamily.models
+                          .sort(function compare(a: any, b: any) {
+                            if (a.name < b.name) return -1;
+                            if (a.name > b.name) return 1;
+                            return 0;
+                          })
+                          .map((family: any, familyIdx: number) => (
+                            <Listbox.Option
+                              disabled={family.unavailable}
+                              key={familyIdx}
+                              className={({ active }) =>
+                                `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                                  active
+                                    ? 'bg-gray-100 text-amber-900'
+                                    : 'text-gray-500'
+                                }`
+                              }
+                              value={family}
+                            >
+                              {({ selected }) => (
+                                <>
+                                  <span
+                                    className={`block truncate ${
+                                      selected ? 'font-medium' : 'font-normal'
+                                    }`}
+                                  >
+                                    {family.name}
+                                  </span>
+                                  {selected ? (
+                                    <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
+                                      <CheckIcon
+                                        className="h-5 w-5"
+                                        aria-hidden="true"
+                                      />
+                                    </span>
+                                  ) : null}
+                                </>
+                              )}
+                            </Listbox.Option>
+                          ))}
+                      </Listbox.Options>
+                    </Transition>
+                  </div>
+                </Listbox>
+                {errors.model && (
+                  <div className="text-red-500">{errors.model.message}</div>
+                )}
+              </div>
+            ) : (
+              <div>Sélectionnez une famille avant (disabled)</div>
+            )}
+
             {/* <div className="mb-4">
               <label htmlFor="slug">Slug</label>
               <input
@@ -446,7 +778,7 @@ export default function AdminCarEditScreen() {
               ))}
             </div>
             <div className="mb-4">
-              <label htmlFor="imagesFile">Upload images</label>
+              <label htmlFor="imagesFile">Télécharger des images</label>
               <input
                 type="file"
                 className={`w-full ${
@@ -462,52 +794,60 @@ export default function AdminCarEditScreen() {
               )}
               {loadingUpload && <div>Uploading....</div>}
             </div>
-            <div className="mb-4">
-              <label htmlFor="brand">brand</label>
-              <input
-                onKeyPress={(event) => deleteEnterKeyAction(event)}
-                type="text"
-                className="w-full"
-                id="brand"
-                {...register('brand', {
-                  required: 'Please enter brand',
-                })}
-              />
-              {errors.brand && (
-                <div className="text-red-500">{errors.brand.message}</div>
-              )}
-            </div>
-            <div className="mb-4">
-              <label htmlFor="model">Modèle</label>
-              <input
-                onKeyPress={(event) => deleteEnterKeyAction(event)}
-                type="text"
-                className="w-full"
-                id="model"
-                {...register('model', {
-                  required: 'Please enter model',
-                })}
-              />
-              {errors.model && (
-                <div className="text-red-500">{errors.model.message}</div>
-              )}
-            </div>
 
-            <div className="mb-4">
+            <div className="flex flex-col mb-5">
               <label htmlFor="energy">Energie</label>
-              <input
-                onKeyPress={(event) => deleteEnterKeyAction(event)}
-                type="text"
-                className="w-full"
+
+              <select
                 id="energy"
+                className="bg-white"
                 {...register('features.energy')}
-              />
+              >
+                <option value="N/C">Energie</option>
+                {/* {selectedModel.type.map((type: any, index: number) => (
+                  <option key={index} value={type.name}>
+                    {type.name}
+                  </option>
+                ))} */}
+                <option value="Diesel">Diesel</option>
+                <option value="Essence">Essence</option>
+                <option value="GPL">GPL</option>
+              </select>
               {errors.features?.energy && (
                 <div className="text-red-500">
                   {errors.features.energy.message}
                 </div>
               )}
             </div>
+
+            {/* <div className="flex flex-col">
+              <label htmlFor="energy">Motorisation</label>
+
+              <select
+                id="motorisation"
+                className="bg-white"
+                {...register('features.motorisation')}
+              >
+                <option value="N/C">Motorisation</option>
+                {(selectedModel.type.length > 0
+                  ? getValues('features.energy') === 'Essence'
+                    ? selectedModel.type[1].motorisation
+                    : getValues('features.energy') === 'GPL'
+                    ? selectedModel.type[2].motorisation
+                    : selectedModel.type[0].motorisation
+                  : selectedModel.type[0].motorisation
+                ).map((mot: any, index: number) => (
+                  <option key={index} value={mot}>
+                    {mot}
+                  </option>
+                ))}
+              </select>
+              {errors.features?.motorisation && (
+                <div className="text-red-500">
+                  {errors.features.motorisation.message}
+                </div>
+              )}
+            </div> */}
 
             <div className="mb-4">
               <label htmlFor="motorisation">Motorisation</label>
@@ -703,3 +1043,17 @@ export default function AdminCarEditScreen() {
 }
 
 AdminCarEditScreen.auth = { adminOnly: true };
+
+// export async function getServerSideProps() {
+//   const { data } = await axios.get('https://api.api-ninjas.com/v1/cars', {
+//     headers: {
+//       'X-Api-Key': 'zBT5WFO6kTYI9r6MAGLAgA==yeu2azf4n66rCqgF',
+//     },
+//   });
+//   console.log(data);
+//   return {
+//     props: {
+//       data: 'data',
+//     },
+//   };
+// }

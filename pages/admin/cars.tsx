@@ -117,20 +117,28 @@ export default function AdminCarsScreen() {
             <div className="alert-error">{error}</div>
           ) : (
             <div className="overflow-x-auto">
-              {/* TEST NEW TABLE  */}
-
-              {/* <div className="table w-full ...">
-                <div className="table-header-group ...">
-                  <div className="table-row">
-                    <div className="table-cell text-left ..."></div>
-                    <div className="table-cell text-left ...">CATEGORY</div>
-                    <div className="table-cell text-left ...">ID</div>
-                    <div className="table-cell text-left ...">MARQUE</div>
-                    <div className="table-cell text-left ...">MODEL</div>
-                    <div className="table-cell text-left ...">ANNEE</div>
-                    <div className="table-cell text-left ...">KILOMETRAGE</div>
-                    <div className="table-cell text-left ...">PRIX</div>
-                    <div className="table-cell text-left ...">ACTIONS</div>
+              <div className="table w-full mt-10">
+                <div className="table-header-group">
+                  <div className="table-row font-bold">
+                    <div className="table-cell text-left border-b p-3 sm:p-5"></div>
+                    <div className="hidden xs:table-cell text-center border-b p-3 sm:p-5">
+                      CATEGORY
+                    </div>
+                    <div className="hidden xl:table-cell text-left border-b p-5">
+                      ID
+                    </div>
+                    <div className="hidden sm:table-cell text-center border-b p-3 sm:p-5">
+                      PRIX
+                    </div>
+                    <div className="hidden sm:table-cell text-left border-b p-5">
+                      MARQUE & MODELE
+                    </div>
+                    <div className="hidden lg:table-cell text-left border-b p-5">
+                      KILOMETRAGE
+                    </div>
+                    <div className="table-cell text-center xs:text-left border-b p-3 sm:p-5">
+                      ACTIONS
+                    </div>
                   </div>
                 </div>
                 <div className="table-row-group">
@@ -142,112 +150,64 @@ export default function AdminCarsScreen() {
                     })
                     .map((car: any) => (
                       <div key={car._id} className="table-row">
-                        <div className="table-cell ...">
+                        <div className="table-cell w-36 pt-3 border-b">
+                          <div className="text-center my-3 sm:hidden">
+                            <p className="ml-3">{car.price} €</p>
+                          </div>
                           <img
                             src={car.images[0]}
                             alt={`${car.brand} ${car.model}`}
                             className="rounded-full w-full"
                           />
-                        </div>
-                        <div className="table-cell ...">{car.category}</div>
-                        <div className="table-cell ...">
-                          {car._id.substring(20, 24)}
-                        </div>
-                        <div className="table-cell ...">{car.brand}</div>
-                        <div className="table-cell ...">{car.model}</div>
-                        <div className="table-cell ...">{car.year}</div>
-                        <div className="table-cell ...">{car.mileage}</div>
-                        <div className="table-cell ...">
-                          <div className="bg-[#2f2f47] rounded-full p-3 text-center text-white w-24">
-                            {car.price} €
+                          <p className="text-xs text-center mt-2">{car.year}</p>
+                          <div className="text-xs text-center my-3">
+                            <p className="sm:hidden">{car.brand}</p>
+                            <p className="sm:hidden">{car.model}</p>
                           </div>
                         </div>
-                        <div className="table-cell ...">
-                          <Link
-                            href={`/admin/car/${car._id}`}
-                            type="button"
-                            className="default-button mr-5 text-blue-500 hover:text-blue-700 active:text-blue-900"
-                          >
-                            Modifier
-                          </Link>
-                          &nbsp;
-                          <button
-                            onClick={() => deleteHandler(car._id)}
-                            className="default-button text-blue-500 hover:text-blue-700 active:text-blue-900"
-                            type="button"
-                          >
-                            Supprimer
-                          </button>
+                        <div className="hidden xs:table-cell p-3 sm:p-5 align-middle border-b text-center">
+                          {car.category}
+                        </div>
+                        <div className="hidden xl:table-cell border-b p-5 align-middle">
+                          {car._id.substring(20, 24)}
+                        </div>
+                        <div className="hidden sm:table-cell border-b p-5 align-middle">
+                          <div className="bg-[#2f2f47] rounded-full p-2 text-sm lg:text-lg text-center text-white w-full">
+                            {car.price}€
+                          </div>
+                        </div>
+                        <div className="hidden sm:table-cell align-middle p-5 border-b text-center">
+                          <p className="font-semibold">
+                            {car.brand.toUpperCase()}
+                          </p>
+                          <p>{car.model}</p>
+                        </div>
+                        <div className="hidden lg:table-cell border-b p-5 align-middle">
+                          {car.mileage} km
+                        </div>
+                        <div className="table-cell border-b align-middle p-3 sm:p-5 text-center xs:text-left">
+                          <div>
+                            <Link
+                              href={`/admin/car/${car._id}`}
+                              type="button"
+                              className="default-button mr-5 text-blue-500 hover:text-blue-700 active:text-blue-900"
+                            >
+                              Modifier
+                            </Link>
+                            &nbsp;
+                            <button
+                              onClick={() => deleteHandler(car._id)}
+                              className="default-button text-blue-500 hover:text-blue-700 active:text-blue-900"
+                              type="button"
+                            >
+                              Supprimer
+                            </button>
+                          </div>
                         </div>
                       </div>
                     ))}
                 </div>
-              </div> */}
-
-              {/* END TEST NEW TABLE */}
-
-              <table className="min-w-full">
-                <thead className="border-b">
-                  <tr>
-                    <th className="p-5 text-center"></th>
-                    <th className="p-5 text-left">CATEGORY</th>
-                    <th className="px-5 text-left">ID</th>
-                    <th className="p-5 text-left">MARQUE</th>
-                    <th className="p-5 text-left">MODEL</th>
-                    <th className="p-5 text-left">ANNEE</th>
-                    <th className="p-5 text-left">KILOMETRAGE</th>
-                    <th className="p-5 text-left">PRIX</th>
-                    <th className="p-5 text-left">ACTIONS</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cars
-                    .sort(function compare(a: any, b: any) {
-                      if (a.cratedAt > b.createdAt) return -1;
-                      if (a.createdAt < b.createdAt) return 1;
-                      return 0;
-                    })
-                    .map((car: any) => (
-                      <tr key={car._id} className="border-b">
-                        <td className=" p-5 flex items-center w-36">
-                          <img
-                            src={car.images[0]}
-                            alt={`${car.brand} ${car.model}`}
-                            className="rounded-full w-full"
-                          />
-                        </td>
-                        <td className=" p-5 ">{car.category}</td>
-                        <td className=" p-5 ">{car._id.substring(20, 24)}</td>
-                        <td className=" p-5 ">{car.brand}</td>
-                        <td className=" p-5 ">{car.model}</td>
-                        <td className=" p-5 ">{car.year}</td>
-                        <td className=" p-5 ">{car.mileage} km</td>
-                        <td className=" p-5">
-                          <div className="bg-[#2f2f47] rounded-full p-3 text-center text-white w-24">
-                            {car.price} €
-                          </div>
-                        </td>
-                        <td className=" p-5 ">
-                          <Link
-                            href={`/admin/car/${car._id}`}
-                            type="button"
-                            className="default-button mr-5 text-blue-500 hover:text-blue-700 active:text-blue-900"
-                          >
-                            Modifier
-                          </Link>
-                          &nbsp;
-                          <button
-                            onClick={() => deleteHandler(car._id)}
-                            className="default-button text-blue-500 hover:text-blue-700 active:text-blue-900"
-                            type="button"
-                          >
-                            Supprimer
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
+              </div>
             </div>
           )}
         </div>
