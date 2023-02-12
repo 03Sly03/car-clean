@@ -645,7 +645,8 @@ export default function AdminCarEditScreen() {
                       }`}
                       id="brand"
                       value={
-                        selectedModel.name === 'Sélectionnez un modèle'
+                        selectedModel.name === 'Sélectionnez un modèle' ||
+                        selectedBrand.brand !== selectedFamily.brand
                           ? ''
                           : `${selectedFamily.name} ${selectedModel.name}`
                       }
@@ -655,6 +656,7 @@ export default function AdminCarEditScreen() {
                     >
                       <span className="block truncate">
                         {selectedFamily.name === 'Sélectionnez une marque' ||
+                        selectedBrand.brand !== selectedFamily.brand ||
                         selectedFamily.name !== selectedModel.model
                           ? 'Sélectionnez un modèle'
                           : selectedModel.name}

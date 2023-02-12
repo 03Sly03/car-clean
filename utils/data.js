@@ -29,6 +29,74 @@ const data = {
     serviceName: 'Filtre à huile & huile',
     reduction: 20,
   },
+  activities: [
+    {
+      title: 'Entretient courrant',
+      slug: 'change-worn-parts',
+      works: [
+        {
+          activity: 'Entretient courrant',
+          name: 'Vidange',
+          products: [
+            {
+              workName: 'Vidange',
+              name: 'Filtre à huile & huile',
+            },
+            {
+              workName: 'Vidange',
+              name: 'Filtre à air',
+            },
+            {
+              workName: 'Vidange',
+              name: "Filtre d'habitacle",
+            },
+            {
+              workName: 'Vidange',
+              name: 'Filtre à carburant',
+            },
+          ],
+        },
+        {
+          activity: 'Entretient courrant',
+          name: 'Freins',
+          products: [
+            {
+              workName: 'Freins',
+              name: 'Plaquettes avant',
+            },
+            {
+              workName: 'Freins',
+              name: 'Plaquettes arrière',
+            },
+            {
+              workName: 'Freins',
+              name: 'Disques avant',
+            },
+            {
+              workName: 'Freins',
+              name: 'Disques arrière',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Climatisation',
+      slug: 'air-conditioner',
+      works: [
+        {
+          activity: 'Climatisation',
+          name: 'Recharge',
+          products: [
+            {
+              workName: 'Recharge',
+              name: 'Détection de fuite et recharge du fluide frigorigène',
+            },
+          ],
+        },
+      ],
+    },
+  ],
   cars: [
     {
       slug: 'renaut-laguna',

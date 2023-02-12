@@ -5,6 +5,7 @@ import { NextApiHandler } from 'next';
 import Car from '../../models/Car';
 import Maintenance from '../../models/Maintenance';
 import Promotion from '../../models/Promotion';
+import Activity from '../../models/Activity';
 
 const handler: NextApiHandler = async (req, res) => {
   await db.connect();
@@ -16,6 +17,8 @@ const handler: NextApiHandler = async (req, res) => {
   await Maintenance.insertMany(data.maintenance);
   await Promotion.deleteMany();
   await Promotion.insertMany(data.promotion);
+  await Activity.deleteMany();
+  await Activity.insertMany(data.activities);
   await db.disconnect();
   res.send({ message: 'seeded successfully' });
 };
