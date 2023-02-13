@@ -1,5 +1,5 @@
 {
-  "name": "slysstore",
+  "name": "carclean-auto",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -20,6 +20,7 @@
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.33.0",
     "js-cookie": "^3.0.1",
+    "mongodb": "^5.0.1",
     "mongoose": "^6.8.3",
     "next": "13.1.1",
     "next-auth": "^4.18.8",
