@@ -105,6 +105,10 @@ function CarScreen(props: any) {
 export default CarScreen;
 
 export async function getServerSideProps(context: any) {
+  context.res.setHeader(
+    'cache-Control',
+    'public, s-maxage=1800, stale-while-revalidate=86400'
+  );
   const { params } = context;
   const { slug } = params;
 
