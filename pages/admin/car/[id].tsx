@@ -2,7 +2,8 @@
 // import { Listbox } from '@headlessui/react';
 // import { CheckIcon } from '@heroicons/react/24/outline';
 import { Listbox, Transition } from '@headlessui/react';
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline';
+import ChevronUpDownIcon from '@heroicons/react/24/outline/ChevronUpDownIcon';
+import CheckIcon from '@heroicons/react/24/outline/CheckIcon';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';

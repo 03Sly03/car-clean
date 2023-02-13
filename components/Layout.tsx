@@ -4,9 +4,11 @@ import Link from 'next/link';
 import { ToastContainer } from 'react-toastify';
 import { signOut, useSession } from 'next-auth/react';
 import 'react-toastify/dist/ReactToastify.css';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Transition, Menu, Disclosure } from '@headlessui/react';
 import Image from 'next/image';
-import { Bars3Icon, XMarkIcon, UserIcon } from '@heroicons/react/24/outline';
+import Bars3Icon from '@heroicons/react/24/outline/Bars3Icon';
+import XMarkIcon from '@heroicons/react/24/outline/XMarkIcon';
+import UserIcon from '@heroicons/react/24/outline/UserIcon';
 
 const navigation = [
   { name: 'Accueil', href: '/', current: false },
